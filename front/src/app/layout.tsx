@@ -1,0 +1,42 @@
+import type { Metadata } from "next";
+import { Heebo, Roboto, Signika_Negative } from "next/font/google";
+import "./globals.css";
+
+const geistheebo = Heebo({
+  variable: "--font-geist-hebbo",
+  subsets: ["latin"],
+});
+
+const geistroboto = Roboto({
+  variable: "--font-geist-magra",
+  subsets: ["latin"],
+});
+
+const geistSignika = Signika_Negative({
+  variable: "--font-geist-signika",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Spinify",
+  description: "Buy your vinil love in Spinify",
+  icons: {
+    icon: "/assets/ShortLogo.png",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistheebo.variable} ${geistroboto.variable} ${geistSignika.variable} antialiased`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
