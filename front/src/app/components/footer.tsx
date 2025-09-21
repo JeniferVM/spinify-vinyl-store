@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
-    <div className="bg-black text-white py-12 px-6 mt-16">
+    <div className=" text-white py-12 px-6 mt-16">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div className="text-left">
-          <p className="text-white text-xl lg:text-2xl font-normal leading-relaxed">
+          <p className="text-white text-xl lg:text-2xl font-hebbo leading-relaxed">
             Follow us on IG, X and Spotify to know about new arrivals, sales,
             music news and more.
           </p>
@@ -21,7 +21,7 @@ const Footer = () => {
               <span className="text-orange-500 text-2xl font-bold">S</span>
             </div>
           </div>
-          <p className="text-orange-400 text-xl font-medium">@S.pinify</p>
+          <p className="text-custume-orange text-xl font-medium">@S.pinify</p>
         </div>
       </div>
 

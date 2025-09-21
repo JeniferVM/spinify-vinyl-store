@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { Heebo, Roboto, Signika_Negative } from "next/font/google";
 import "./globals.css";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 const geistheebo = Heebo({
-  variable: "--font-geist-hebbo",
+  variable: "--font-hebbo",
   subsets: ["latin"],
 });
 
 const geistroboto = Roboto({
-  variable: "--font-geist-magra",
+  variable: "--font-roboto",
   subsets: ["latin"],
 });
 
@@ -35,7 +37,9 @@ export default function RootLayout({
       <body
         className={`${geistheebo.variable} ${geistroboto.variable} ${geistSignika.variable} antialiased`}
       >
+        <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -14,7 +14,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="flex justify-between mb-0 pt-0 p-5 items-center">
+      <div className="flex justify-between mb-0 pt-0 pt-3 items-center">
         <section className="cursor-pointer" onClick={handleMenuClick}>
           <Image
             src="/assets/MenuIcon.png"
@@ -38,16 +38,26 @@ const NavBar = () => {
             />
           </Link>
         </section>
-
-        <section className="text-2xl hidden md:flex flex-wrap justify-between text-white ">
-          <Link
-            href={PATHROUTES.REGISTER}
-            className="m-4"
-            onClick={handleLogoClick}
-          >
-            REGISTER
-          </Link>
-        </section>
+        <span className="flex justify-between">
+          <section className="text-2xl hidden md:flex flex-wrap justify-between text-white ">
+            <Link
+              href={PATHROUTES.LOGIN}
+              className="m-4"
+              onClick={handleLogoClick}
+            >
+              LOGIN
+            </Link>
+          </section>
+          <section className="text-2xl hidden md:flex flex-wrap justify-between text-custume-orange ">
+            <Link
+              href={PATHROUTES.REGISTER}
+              className="m-4"
+              onClick={handleLogoClick}
+            >
+              REGISTER
+            </Link>
+          </section>
+        </span>
       </div>
 
       <Sidebar isOpen={isOpen} onClose={handleLogoClick} />

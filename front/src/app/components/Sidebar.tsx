@@ -31,8 +31,9 @@ const Sidebar = ({ isOpen, onClose }: SideBarProps) => {
             <Link
               key={navigatorByItem.name}
               href={navigatorByItem.route}
-              className="flex items-center gap-3 text-white text-2xl hover:text-orange-400 hover:font-semibold transition"
+              className="flex items-center gap-3 text-white text-2xl hover:text-custume-orange hover:font-semibold transition"
               onClick={onClose}
+              prefetch
             >
               {navigatorByItem.name}
             </Link>

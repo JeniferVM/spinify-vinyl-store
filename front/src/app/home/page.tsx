@@ -2,17 +2,22 @@ import Image from "next/image";
 import newArrivals from "../helpers/newArrivals";
 import bestSellers from "../helpers/bestSellers";
 import ProductCard from "../components/ProductCard";
-import NavBar from "../components/NavBar";
 import Link from "next/link";
-import Footer from "../components/footer";
 
 export default function Home() {
   return (
     <div>
-      <NavBar />
       <div className="flex justify-around mt-2">
-        <h3 className="text-2xl mb-2 text-white flex justify-between">
-          <Link href={`products`}>all products</Link>
+        <h3 className="text-2xl mb-2 text-custume-orange hover:text-white">
+          <Link href={`products`} className="flex items-center gap-2">
+            <Image
+              src="/assets/ShortLogo.png"
+              alt="ShortLogo"
+              width={25}
+              height={25}
+            />
+            all products
+          </Link>
         </h3>
         <Image
           className="mb-2"
@@ -62,7 +67,6 @@ export default function Home() {
           </h3>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
