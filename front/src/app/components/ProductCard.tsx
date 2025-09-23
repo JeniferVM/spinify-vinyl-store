@@ -1,39 +1,46 @@
 import Image from "next/image";
-import { IProduct } from "@/app/interface/product.interface";
+import productInterface from "../interface/productInterface";
 
 interface CardProps {
-  product: IProduct;
+  product: productInterface;
 }
 
 export const ProductCard = ({ product }: CardProps) => {
   return (
-    <div className="w-80 hover:w-96 h-130 hover:h-150 bg-oxford/50 rounded-lg overflow-hidden transition-transform hover:scale-105 p-7">
-      <div className="overflow-hidden">
+    <div className="group w-80 h-auto bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:bg-black/40 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-2xl p-6">
+      <div className="relative overflow-hidden rounded-xl mb-4">
         <Image
           width={320}
           height={320}
           src={product.image}
           alt={`Image product: ${product.name}`}
-          className="h-full w-full object-cover hover:w-80 hover:h-80"
+          className="w-full h-72 object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
         />
-      </div>
 
-      <div className="p-6 text-center">
-        <div className="flex items-center justify-between mb-2">
-          <h4 className="text-white font-bold text-2xl">{product.name}</h4>
-          <span className="text-white font-bold text-xl">${product.price}</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+        <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium border border-white/20">
+          ${product.price}
         </div>
-
-        <p className="text-gray-300 font-medium text-lg mb-4 flex items-left">
-          {product.author}
-        </p>
       </div>
 
-      <div className="px-6 pb-6">
-        <button className="w-full bg-custume-orange hover:bg-white text-oxford font-medium py-3 px-4 rounded-md transition-all duration-200 hover:bg-oxford hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 active:scale-100">
+      <div className="space-y-3">
+        <h4 className="text-custume-orange font-semibold text-lg leading-tight group-hover:text-orange-400 transition-colors duration-300">
+          {product.author}
+        </h4>
+
+        <h3 className="text-white font-medium text-xl leading-tight group-hover:text-gray-200 transition-colors duration-300">
+          {product.name}
+        </h3>
+      </div>
+
+      <div className="mt-6">
+        <button className="w-full bg-custume-orange hover:bg-orange-500 text-white font-medium py-3.5 px-4 rounded-xl transition-all duration-300 hover:scale-[0.98] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-custume-orange/50 focus:ring-offset-2 focus:ring-offset-black/20 active:scale-95 group-hover:bg-gradient-to-r group-hover:from-custume-orange group-hover:to-orange-500">
           Add to Cart
         </button>
       </div>
+
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-px bg-gradient-to-r from-transparent via-custume-orange/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   );
 };

@@ -18,6 +18,9 @@ export class Product {
   name: string;
 
   @Column()
+  author: string;
+
+  @Column()
   description: string;
 
   @Column()

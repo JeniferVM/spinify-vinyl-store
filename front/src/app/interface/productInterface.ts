@@ -1,5 +1,5 @@
-export interface IProduct {
-  id?: number;
+export interface productInterface {
+  id: number;
   name: string;
   author: string;
   price: number;
@@ -9,4 +9,4 @@ export interface IProduct {
   stock: number;
 }
 
-export default IProduct;
+export default productInterface;

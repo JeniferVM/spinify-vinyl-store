@@ -1,4 +1,19 @@
-export const mockProducts = [
+import { AppDataSource } from "../config/dataSource";
+import { Product } from "../entities/Product";
+import { ProductRepository } from "../repositories/product.repository";
+
+interface IProduct {
+  id: number;
+  name: string;
+  author: string;
+  price: number;
+  description: string;
+  image: string;
+  categoryId: number;
+  stock: number;
+}
+
+const productsToPreLoad: IProduct[] = [
   {
     id: 1,
     name: "The Dark Side of the Moon",
@@ -7,7 +22,7 @@ export const mockProducts = [
     description:
       "Obra maestra conceptual de 1973 que exploró temas universales como el tiempo, la muerte y la locura. Incluye 'Money' y 'Time'.",
     image:
-      "https://m.media-amazon.com/images/I/51UtWpxbNYL._UF1000,1000_QL80_.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png",
     categoryId: 1,
     stock: 15,
   },
@@ -19,7 +34,7 @@ export const mockProducts = [
     description:
       "El último álbum grabado por The Beatles en 1969, famoso por su portada del cruce peatonal y 'Come Together'.",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Beatles_-_Abbey_Road.jpg/250px-Beatles_-_Abbey_Road.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg",
     categoryId: 1,
     stock: 12,
   },
@@ -31,7 +46,7 @@ export const mockProducts = [
     description:
       "El álbum más vendido de todos los tiempos (1982). Incluye 'Billie Jean', 'Beat It' y el icónico 'Thriller'.",
     image:
-      "https://m.media-amazon.com/images/I/81ogsUqshzL._UF1000,1000_QL80_.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png",
     categoryId: 2,
     stock: 20,
   },
@@ -43,7 +58,7 @@ export const mockProducts = [
     description:
       "Álbum de 2006 que catapultó a Amy al estrellato mundial. Incluye 'Rehab' y 'Back to Black'.",
     image:
-      "https://m.media-amazon.com/images/I/616jOs2SxDL._UF1000,1000_QL80_.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/b/b0/AmyWinehouse-BacktoBlack.jpg",
     categoryId: 6,
     stock: 14,
   },
@@ -55,7 +70,7 @@ export const mockProducts = [
     description:
       "Ópera rock de 1979 sobre el aislamiento y la alienación. Incluye 'Another Brick in the Wall' y 'Comfortably Numb'.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/b/b1/The_Wall_Cover.svg",
+      "https://upload.wikimedia.org/wikipedia/en/1/13/PinkFloydWallCoverOriginalNoText.jpg",
     categoryId: 1,
     stock: 18,
   },
@@ -66,7 +81,7 @@ export const mockProducts = [
     price: 44,
     description:
       "Álbum de 1976 que define el rock americano. La canción título es una de las más reconocidas de todos los tiempos.",
-    image: "https://m.media-amazon.com/images/I/71rYYgYnr2L.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg",
     categoryId: 1,
     stock: 16,
   },
@@ -77,8 +92,7 @@ export const mockProducts = [
     price: 41,
     description:
       "Obra maestra de 1975 que estableció a Springsteen como 'The Boss'. Rock americano en su máxima expresión.",
-    image:
-      "https://m.media-amazon.com/images/I/81F3mfg8WnL._UF1000,1000_QL80_.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/en/4/46/Born_to_Run.jpg",
     categoryId: 1,
     stock: 13,
   },
@@ -89,8 +103,7 @@ export const mockProducts = [
     price: 43,
     description:
       "Álbum de 1977 nacido del caos personal de la banda. Incluye 'Go Your Own Way' y 'Don't Stop'.",
-    image:
-      "https://akamai.sscdn.co/uploadfile/letras/albuns/1/7/0/5/65011623262002.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG",
     categoryId: 2,
     stock: 17,
   },
@@ -101,8 +114,7 @@ export const mockProducts = [
     price: 40,
     description:
       "Álbum de 1987 que llevó a U2 al estrellato mundial. Incluye 'With or Without You' y 'Where the Streets Have No Name'.",
-    image:
-      "https://m.media-amazon.com/images/I/71nhNKvy+fL._UF1000,1000_QL80_.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/en/6/6b/The_Joshua_Tree.png",
     categoryId: 1,
     stock: 15,
   },
@@ -114,7 +126,7 @@ export const mockProducts = [
     description:
       "Álbum sin título oficial de 1971, hogar de 'Stairway to Heaven'. Una de las obras cumbres del hard rock.",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwh9OQw4DlvY2zuuYyAyq-lkFRLitwulOlDw&s",
+      "https://upload.wikimedia.org/wikipedia/en/2/26/Led_Zeppelin_-_Led_Zeppelin_IV.jpg",
     categoryId: 1,
     stock: 11,
   },
@@ -138,7 +150,7 @@ export const mockProducts = [
     description:
       "Álbum y película de 1984 que estableció a Prince como superestrella. Incluye 'Purple Rain' y 'When Doves Cry'.",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/8/86/Purple-rain-cover.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/9/9c/Purple_Rain_%28album%29.jpg",
     categoryId: 2,
     stock: 14,
   },
@@ -150,8 +162,8 @@ export const mockProducts = [
     description:
       "Obra maestra psicodélica de 1967 que cambió para siempre la música popular. Incluye 'Lucy in the Sky with Diamonds'.",
     image:
-      "https://images.unsplash.com/photo-1524650359799-842906ca1c06?w=400&h=400&fit=crop&crop=entropy",
-    categoryId: 1, // Rock
+      "https://upload.wikimedia.org/wikipedia/en/5/50/Sgt._Pepper%27s_Lonely_Hearts_Club_Band.jpg",
+    categoryId: 1,
     stock: 10,
   },
   {
@@ -162,8 +174,8 @@ export const mockProducts = [
     description:
       "Álbum de 1987 que consolidó a Jackson como el Rey del Pop. Incluye 'Smooth Criminal' y 'Man in the Mirror'.",
     image:
-      "https://images.unsplash.com/photo-1485579149621-3123dd979885?w=400&h=400&fit=crop&crop=entropy",
-    categoryId: 2, // Pop
+      "https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png",
+    categoryId: 2,
     stock: 18,
   },
   {
@@ -174,8 +186,8 @@ export const mockProducts = [
     description:
       "Tributo a Syd Barrett de 1975. Incluye 'Shine On You Crazy Diamond' y la canción título que da nombre al álbum.",
     image:
-      "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400&h=400&fit=crop&crop=entropy",
-    categoryId: 1, // Rock
+      "https://upload.wikimedia.org/wikipedia/en/a/a4/Pink_Floyd%2C_Wish_You_Were_Here_%281975%29.png",
+    categoryId: 1,
     stock: 14,
   },
   {
@@ -186,8 +198,8 @@ export const mockProducts = [
     description:
       "Álbum doble de 1975 que muestra la versatilidad de la banda. Incluye 'Kashmir' y 'Trampled Under Foot'.",
     image:
-      "https://images.unsplash.com/photo-1556379095-f847d33ed8fd?w=400&h=400&fit=crop&crop=entropy",
-    categoryId: 4, // Hard Rock
+      "https://upload.wikimedia.org/wikipedia/en/e/e3/Led_Zeppelin_-_Physical_Graffiti.jpg",
+    categoryId: 4,
     stock: 13,
   },
   {
@@ -198,8 +210,8 @@ export const mockProducts = [
     description:
       "Álbum de 1992 que definió el G-funk y lanzó carreras. Incluye 'Nuthin' but a 'G' Thang' con Snoop Dogg.",
     image:
-      "https://images.unsplash.com/photo-1571197900842-c21c30d34b03?w=400&h=400&fit=crop&crop=entropy",
-    categoryId: 6, // Hip Hop
+      "https://upload.wikimedia.org/wikipedia/en/2/27/Dr_Dre_The_Chronic.jpg",
+    categoryId: 6,
     stock: 16,
   },
   {
@@ -210,8 +222,8 @@ export const mockProducts = [
     description:
       "Álbum de 1991 que llevó el grunge al mainstream. 'Smells Like Teen Spirit' definió una generación.",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=entropy",
-    categoryId: 5, // Alternative Rock
+      "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
+    categoryId: 5,
     stock: 19,
   },
   {
@@ -222,8 +234,8 @@ export const mockProducts = [
     description:
       "Obra maestra socialmente consciente de 1971. Incluye 'Mercy Mercy Me' y la canción título.",
     image:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=top",
-    categoryId: 3, // Soul/R&B
+      "https://upload.wikimedia.org/wikipedia/en/7/74/Marvin_Gaye_-_What%27s_Going_On.jpg",
+    categoryId: 3,
     stock: 15,
   },
   {
@@ -234,8 +246,8 @@ export const mockProducts = [
     description:
       "Álbum de 1984 que llevó a Springsteen al estrellato mundial. Crítica social envuelta en rock anthémico.",
     image:
-      "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=400&h=400&fit=crop&crop=top",
-    categoryId: 1, // Rock
+      "https://upload.wikimedia.org/wikipedia/en/0/01/Born_in_the_U.S.A._%28album%29.jpg",
+    categoryId: 1,
     stock: 17,
   },
   {
@@ -245,9 +257,8 @@ export const mockProducts = [
     price: 36,
     description:
       "Debut de 1994 considerado uno de los mejores álbumes de hip-hop. Líricas complejas sobre la vida en Queens.",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=top",
-    categoryId: 6, // Hip Hop
+    image: "https://upload.wikimedia.org/wikipedia/en/2/27/IllmaticNas.jpg",
+    categoryId: 6,
     stock: 14,
   },
   {
@@ -258,8 +269,8 @@ export const mockProducts = [
     description:
       "Álbum introspectivo de 1971 que estableció a Mitchell como una de las mejores compositoras. Incluye 'River'.",
     image:
-      "https://images.unsplash.com/photo-1524650359799-842906ca1c06?w=400&h=400&fit=crop&crop=top",
-    categoryId: 7, // Folk
+      "https://upload.wikimedia.org/wikipedia/en/3/3b/JoniMitchell-Blue.jpg",
+    categoryId: 7,
     stock: 12,
   },
   {
@@ -270,8 +281,8 @@ export const mockProducts = [
     description:
       "Debut de 1967 producido por Andy Warhol. Influyente álbum underground con 'Heroin' y 'Sunday Morning'.",
     image:
-      "https://images.unsplash.com/photo-1485579149621-3123dd979885?w=400&h=400&fit=crop&crop=top",
-    categoryId: 5, // Alternative Rock
+      "https://upload.wikimedia.org/wikipedia/commons/0/0c/VU_and_Nico.jpg",
+    categoryId: 5,
     stock: 11,
   },
   {
@@ -281,9 +292,8 @@ export const mockProducts = [
     price: 45,
     description:
       "Obra maestra del jazz modal de 1959. Incluye 'So What' y 'All Blues'. Esencial en cualquier colección.",
-    image:
-      "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400&h=400&fit=crop&crop=top",
-    categoryId: 8, // Jazz
+    image: "https://upload.wikimedia.org/wikipedia/en/9/9c/KindofBlue.jpg",
+    categoryId: 8,
     stock: 13,
   },
   {
@@ -294,8 +304,8 @@ export const mockProducts = [
     description:
       "Álbum de 2013 que revitalizó el disco-funk. Incluye 'Get Lucky' con Pharrell Williams y Nile Rodgers.",
     image:
-      "https://images.unsplash.com/photo-1556379095-f847d33ed8fd?w=400&h=400&fit=crop&crop=top",
-    categoryId: 9, // Electronic
+      "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg",
+    categoryId: 9,
     stock: 16,
   },
   {
@@ -305,9 +315,8 @@ export const mockProducts = [
     price: 47,
     description:
       "Suite espiritual de 1965 considerada una de las mejores grabaciones de jazz. Música como búsqueda divina.",
-    image:
-      "https://images.unsplash.com/photo-1571197900842-c21c30d34b03?w=400&h=400&fit=crop&crop=top",
-    categoryId: 8, // Jazz
+    image: "https://upload.wikimedia.org/wikipedia/en/c/c7/A_Love_Supreme.jpg",
+    categoryId: 8,
     stock: 10,
   },
   {
@@ -318,8 +327,8 @@ export const mockProducts = [
     description:
       "Álbum de 1965 donde Dylan 'se volvió eléctrico'. Incluye 'Like a Rolling Stone', una de las mejores canciones jamás escritas.",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=top",
-    categoryId: 7, // Folk
+      "https://upload.wikimedia.org/wikipedia/en/6/6a/Bob_Dylan_-_Highway_61_Revisited.jpg",
+    categoryId: 7,
     stock: 15,
   },
   {
@@ -330,8 +339,8 @@ export const mockProducts = [
     description:
       "Debut en solitario de 1998 que ganó 5 Grammys. Mezcla perfecta de hip-hop, R&B y soul con mensaje social.",
     image:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=bottom",
-    categoryId: 3, // Soul/R&B
+      "https://upload.wikimedia.org/wikipedia/en/5/57/Lauryn_Hill_-_The_Miseducation_of_Lauryn_Hill.png",
+    categoryId: 3,
     stock: 18,
   },
   {
@@ -342,8 +351,8 @@ export const mockProducts = [
     description:
       "Álbum de 2001 que perfeccionó la música dance electrónica. Incluye 'One More Time' y 'Harder Better Faster Stronger'.",
     image:
-      "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=400&h=400&fit=crop&crop=bottom",
-    categoryId: 9, // Electronic
+      "https://upload.wikimedia.org/wikipedia/en/2/2e/Daft_Punk_-_Discovery.jpg",
+    categoryId: 9,
     stock: 14,
   },
   {
@@ -354,23 +363,19 @@ export const mockProducts = [
     description:
       "Debut de 1994 que estableció a Biggie como rey del East Coast rap. Incluye 'Juicy' y 'Big Poppa'.",
     image:
-      "https://images.unsplash.com/photo-1524650359799-842906ca1c06?w=400&h=400&fit=crop&crop=bottom",
-    categoryId: 6, // Hip Hop
+      "https://upload.wikimedia.org/wikipedia/en/f/f5/Biggie_Ready_to_Die.jpg",
+    categoryId: 6,
     stock: 16,
   },
 ];
 
-// Categorías para referencia
-// export const categories = {
-//   1: "Rock",
-//   2: "Pop",
-//   3: "Soul/R&B",
-//   4: "Hard Rock",
-//   5: "Alternative Rock",
-//   6: "Hip Hop",
-//   7: "Folk",
-//   8: "Jazz",
-//   9: "Electronic"
-// };
-
-export default mockProducts;
+export const preLoadProducts = async () => {
+  const products = await ProductRepository.find();
+  if (!products.length)
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Product)
+      .values(productsToPreLoad)
+      .execute();
+  console.log("Products preloaded");
+};

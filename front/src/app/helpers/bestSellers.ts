@@ -1,4 +1,4 @@
-export const mockProducts = [
+export const bestSellersMock = [
   {
     id: 8,
     name: "Rumours",
@@ -61,4 +61,4 @@ export const mockProducts = [
   },
 ];
 
-export default mockProducts;
+export default bestSellersMock;
