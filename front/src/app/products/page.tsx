@@ -1,6 +1,6 @@
-import { ProductCard } from "@/app/components/ProductCard";
 import Image from "next/image";
 import { getAllProducts } from "../Services/prod.serv";
+import { ProductsList } from "../components/ProductList";
 
 export default async function ProductsPage() {
   const allProducts = await getAllProducts();
@@ -38,22 +38,8 @@ export default async function ProductsPage() {
           <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
         </div>
       </div>
-      <section className="max-w-7xl mt-2 mx-auto px-6">
-        <div className="mb-12 text-center">
-          <div className="inline-flex items-center gap-4 px-6 py-3 bg-black/20 backdrop-blur-sm rounded-2xl border border-white/10">
-            <span className="text-white/70 text-sm font-medium">
-              {allProducts.length} products available
-            </span>
-            <div className="w-2 h-2 bg-custume-orange/60 rounded-full"></div>
-          </div>
-        </div>
+      <ProductsList products={allProducts} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 justify-items-center">
-          {allProducts.map((product) => (
-            <ProductCard product={product} key={product.name} />
-          ))}
-        </div>
-      </section>
       <div className="mt-20 text-center">
         <div className="relative w-1/3 mx-auto">
           <div className="h-px bg-gradient-to-r from-transparent via-custume-orange/30 to-transparent"></div>

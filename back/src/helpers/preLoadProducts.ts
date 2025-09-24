@@ -52,18 +52,6 @@ const productsToPreLoad: IProduct[] = [
   },
   {
     id: 4,
-    name: "Back to Black",
-    author: "Amy Winehouse",
-    price: 38,
-    description:
-      "Álbum de 2006 que catapultó a Amy al estrellato mundial. Incluye 'Rehab' y 'Back to Black'.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/en/b/b0/AmyWinehouse-BacktoBlack.jpg",
-    categoryId: 6,
-    stock: 14,
-  },
-  {
-    id: 5,
     name: "The Wall",
     author: "Pink Floyd",
     price: 47,
@@ -75,7 +63,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 18,
   },
   {
-    id: 6,
+    id: 5,
     name: "Hotel California",
     author: "Eagles",
     price: 44,
@@ -86,18 +74,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 16,
   },
   {
-    id: 7,
-    name: "Born to Run",
-    author: "Bruce Springsteen",
-    price: 41,
-    description:
-      "Obra maestra de 1975 que estableció a Springsteen como 'The Boss'. Rock americano en su máxima expresión.",
-    image: "https://upload.wikimedia.org/wikipedia/en/4/46/Born_to_Run.jpg",
-    categoryId: 1,
-    stock: 13,
-  },
-  {
-    id: 8,
+    id: 6,
     name: "Rumours",
     author: "Fleetwood Mac",
     price: 43,
@@ -108,7 +85,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 17,
   },
   {
-    id: 9,
+    id: 7,
     name: "The Joshua Tree",
     author: "U2",
     price: 40,
@@ -119,7 +96,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 15,
   },
   {
-    id: 10,
+    id: 8,
     name: "Led Zeppelin IV",
     author: "Led Zeppelin",
     price: 46,
@@ -131,7 +108,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 11,
   },
   {
-    id: 11,
+    id: 9,
     name: "OK Computer",
     author: "Radiohead",
     price: 44,
@@ -143,19 +120,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 12,
   },
   {
-    id: 12,
-    name: "Purple Rain",
-    author: "Prince",
-    price: 42,
-    description:
-      "Álbum y película de 1984 que estableció a Prince como superestrella. Incluye 'Purple Rain' y 'When Doves Cry'.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/en/9/9c/Purple_Rain_%28album%29.jpg",
-    categoryId: 2,
-    stock: 14,
-  },
-  {
-    id: 13,
+    id: 10,
     name: "Sgt. Pepper's Lonely Hearts Club Band",
     author: "The Beatles",
     price: 50,
@@ -167,7 +132,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 10,
   },
   {
-    id: 14,
+    id: 11,
     name: "Bad",
     author: "Michael Jackson",
     price: 40,
@@ -179,7 +144,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 18,
   },
   {
-    id: 15,
+    id: 12,
     name: "Wish You Were Here",
     author: "Pink Floyd",
     price: 46,
@@ -191,7 +156,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 14,
   },
   {
-    id: 16,
+    id: 13,
     name: "Physical Graffiti",
     author: "Led Zeppelin",
     price: 48,
@@ -203,19 +168,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 13,
   },
   {
-    id: 17,
-    name: "The Chronic",
-    author: "Dr. Dre",
-    price: 35,
-    description:
-      "Álbum de 1992 que definió el G-funk y lanzó carreras. Incluye 'Nuthin' but a 'G' Thang' con Snoop Dogg.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/en/2/27/Dr_Dre_The_Chronic.jpg",
-    categoryId: 6,
-    stock: 16,
-  },
-  {
-    id: 18,
+    id: 14,
     name: "Nevermind",
     author: "Nirvana",
     price: 39,
@@ -227,31 +180,7 @@ const productsToPreLoad: IProduct[] = [
     stock: 19,
   },
   {
-    id: 19,
-    name: "What's Going On",
-    author: "Marvin Gaye",
-    price: 37,
-    description:
-      "Obra maestra socialmente consciente de 1971. Incluye 'Mercy Mercy Me' y la canción título.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/en/7/74/Marvin_Gaye_-_What%27s_Going_On.jpg",
-    categoryId: 3,
-    stock: 15,
-  },
-  {
-    id: 20,
-    name: "Born in the U.S.A.",
-    author: "Bruce Springsteen",
-    price: 38,
-    description:
-      "Álbum de 1984 que llevó a Springsteen al estrellato mundial. Crítica social envuelta en rock anthémico.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/en/0/01/Born_in_the_U.S.A._%28album%29.jpg",
-    categoryId: 1,
-    stock: 17,
-  },
-  {
-    id: 21,
+    id: 15,
     name: "Illmatic",
     author: "Nas",
     price: 36,
@@ -262,60 +191,135 @@ const productsToPreLoad: IProduct[] = [
     stock: 14,
   },
   {
-    id: 22,
-    name: "Blue",
-    author: "Joni Mitchell",
-    price: 41,
+    id: 16,
+    name: "Songs in the Key of Life",
+    author: "Stevie Wonder",
+    price: 42,
     description:
-      "Álbum introspectivo de 1971 que estableció a Mitchell como una de las mejores compositoras. Incluye 'River'.",
+      "Obra maestra de 1976 con clásicos como 'Isn't She Lovely' y 'Sir Duke'.",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/3/3b/JoniMitchell-Blue.jpg",
-    categoryId: 7,
+      "https://upload.wikimedia.org/wikipedia/en/e/e2/Songs_in_the_key_of_life.jpg",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    id: 17,
+    name: "The College Dropout",
+    author: "Kanye West",
+    price: 40,
+    description:
+      "Debut de 2004 con mezcla de gospel, rap y producción innovadora. Incluye 'Jesus Walks'.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/en/a/a3/Kanyewest_collegedropout.jpg",
+    categoryId: 6,
+    stock: 19,
+  },
+  {
+    id: 18,
+    name: "Horses",
+    author: "Patti Smith",
+    price: 34,
+    description:
+      "Debut de 1975 que fusiona poesía y rock; imprescindible en la historia del punk/rock alternativo.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Cutting_card_from_Patti_Smith%27s_album%2C_Horses.jpg",
+    categoryId: 1,
     stock: 12,
   },
   {
-    id: 23,
-    name: "The Velvet Underground & Nico",
-    author: "The Velvet Underground",
-    price: 43,
+    id: 19,
+    name: "Loveless",
+    author: "My Bloody Valentine",
+    price: 38,
     description:
-      "Debut de 1967 producido por Andy Warhol. Influyente álbum underground con 'Heroin' y 'Sunday Morning'.",
+      "Álbum de 1991 que definió el shoegaze: muros de guitarra, texturas y melodías etéreas.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/0/0c/VU_and_Nico.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/4/4b/My_Bloody_Valentine_-_Loveless.png",
     categoryId: 5,
-    stock: 11,
+    stock: 10,
   },
   {
-    id: 24,
-    name: "Kind of Blue",
-    author: "Miles Davis",
+    id: 20,
+    name: "Electric Ladyland",
+    author: "The Jimi Hendrix Experience",
     price: 45,
     description:
-      "Obra maestra del jazz modal de 1959. Incluye 'So What' y 'All Blues'. Esencial en cualquier colección.",
-    image: "https://upload.wikimedia.org/wikipedia/en/9/9c/KindofBlue.jpg",
-    categoryId: 8,
-    stock: 13,
+      "Doble álbum de 1968 y culminación creativa de Hendrix; mezcla psicodelia, blues y experimentación sonora.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/en/f/f2/Jimi_Hendrix_-_Electric_Ladyland.jpg",
+    categoryId: 1,
+    stock: 14,
   },
   {
-    id: 25,
-    name: "Random Access Memories",
-    author: "Daft Punk",
-    price: 44,
+    id: 21,
+    name: "Mezzanine",
+    author: "Massive Attack",
+    price: 42,
     description:
-      "Álbum de 2013 que revitalizó el disco-funk. Incluye 'Get Lucky' con Pharrell Williams y Nile Rodgers.",
+      "Lanzado en 1998, mezcla trip hop y electronica con atmósferas oscuras; incluye 'Teardrop'.",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/e/e9/Massive_Attack_-_Mezzanine.png",
     categoryId: 9,
     stock: 16,
   },
+
+  {
+    id: 22,
+    name: "Master of Puppets",
+    author: "Metallica",
+    price: 47,
+    description:
+      "Tercer disco (1986) de Metallica; hito del thrash/metal con riffs potentes y composición épica.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/en/b/b2/Metallica_-_Master_of_Puppets_cover.jpg",
+    categoryId: 4,
+    stock: 13,
+  },
+  {
+    id: 23,
+    name: "DAMN.",
+    author: "Kendrick Lamar",
+    price: 39,
+    description:
+      "Álbum de 2017 que mezcla hip-hop contemporáneo con reflexiones personales y sociales.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png",
+    categoryId: 6,
+    stock: 18,
+  },
+  {
+    id: 24,
+    name: "Channel Orange",
+    author: "Frank Ocean",
+    price: 36,
+    description:
+      "Debut oficial (2012) que combina R&B alternativo, soul y narrativa introspectiva.",
+    image: "https://upload.wikimedia.org/wikipedia/en/2/28/Channel_ORANGE.jpg",
+    categoryId: 3,
+    stock: 12,
+  },
+  {
+    id: 25,
+    name: "Blue Train",
+    author: "John Coltrane",
+    price: 40,
+    description:
+      "Clásico del jazz hard-bop (1958) con composiciones inolvidables y un gran quinteto.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/en/6/68/John_Coltrane_-_Blue_Train.jpg",
+    categoryId: 8,
+    stock: 10,
+  },
+
   {
     id: 26,
     name: "A Love Supreme",
     author: "John Coltrane",
     price: 47,
     description:
-      "Suite espiritual de 1965 considerada una de las mejores grabaciones de jazz. Música como búsqueda divina.",
-    image: "https://upload.wikimedia.org/wikipedia/en/c/c7/A_Love_Supreme.jpg",
+      "Suite espiritual de 1965 considerada una de las mejores grabaciones de jazz.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/en/9/9a/John_Coltrane_-_A_Love_Supreme.jpg",
     categoryId: 8,
     stock: 10,
   },
@@ -325,9 +329,9 @@ const productsToPreLoad: IProduct[] = [
     author: "Bob Dylan",
     price: 42,
     description:
-      "Álbum de 1965 donde Dylan 'se volvió eléctrico'. Incluye 'Like a Rolling Stone', una de las mejores canciones jamás escritas.",
+      "Álbum de 1965 donde Dylan amplió su sonido eléctrico; incluye 'Like a Rolling Stone'.",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/6/6a/Bob_Dylan_-_Highway_61_Revisited.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/9/95/Bob_Dylan_-_Highway_61_Revisited.jpg",
     categoryId: 7,
     stock: 15,
   },
@@ -337,9 +341,9 @@ const productsToPreLoad: IProduct[] = [
     author: "Lauryn Hill",
     price: 40,
     description:
-      "Debut en solitario de 1998 que ganó 5 Grammys. Mezcla perfecta de hip-hop, R&B y soul con mensaje social.",
+      "Debut de 1998 que mezcla soul, R&B y hip-hop; ganador de múltiples Grammys.",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/5/57/Lauryn_Hill_-_The_Miseducation_of_Lauryn_Hill.png",
+      "https://upload.wikimedia.org/wikipedia/en/9/99/The_Miseducation_of_Lauryn_Hill.png",
     categoryId: 3,
     stock: 18,
   },
@@ -349,9 +353,9 @@ const productsToPreLoad: IProduct[] = [
     author: "Daft Punk",
     price: 43,
     description:
-      "Álbum de 2001 que perfeccionó la música dance electrónica. Incluye 'One More Time' y 'Harder Better Faster Stronger'.",
+      "Álbum de 2001 que perfeccionó la música dance electrónica; incluye 'One More Time'.",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/2/2e/Daft_Punk_-_Discovery.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/a/a1/Discovery_Daft_Punk_Japan.png",
     categoryId: 9,
     stock: 14,
   },
@@ -361,9 +365,8 @@ const productsToPreLoad: IProduct[] = [
     author: "The Notorious B.I.G.",
     price: 37,
     description:
-      "Debut de 1994 que estableció a Biggie como rey del East Coast rap. Incluye 'Juicy' y 'Big Poppa'.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/en/f/f5/Biggie_Ready_to_Die.jpg",
+      "Debut de 1994 que marcó el sonido del East Coast rap; incluye 'Juicy' y 'Big Poppa'.",
+    image: "https://upload.wikimedia.org/wikipedia/en/9/97/Ready_To_Die.jpg",
     categoryId: 6,
     stock: 16,
   },
