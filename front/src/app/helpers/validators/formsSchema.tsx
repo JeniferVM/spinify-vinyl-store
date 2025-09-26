@@ -8,10 +8,19 @@ export default interface InputsPropsType {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const LoginInitialValues = {
-  email: "",
-  password: "",
-};
+export interface LoginFormData {
+  email: "";
+  password: "";
+}
+
+export interface RegisterFormData {
+  email: "";
+  password: "";
+  confirmPassword: "";
+  name: "";
+  address: "";
+  phone: "";
+}
 
 export const LoginValSchema = Yup.object({
   email: Yup.string()
@@ -20,13 +29,9 @@ export const LoginValSchema = Yup.object({
   password: Yup.string().min(8).required(),
 });
 
-export const RegisterInitialValues = {
+export const LoginInitialValues: LoginFormData = {
   email: "",
   password: "",
-  confirmPassword: "",
-  name: "",
-  adress: "",
-  phone: "",
 };
 
 export const RegisterValSchema = Yup.object({
@@ -38,8 +43,17 @@ export const RegisterValSchema = Yup.object({
     .oneOf([Yup.ref("password")], "No match passwords")
     .required("Requiered value"),
   name: Yup.string().required("Requiered value"),
-  adress: Yup.string().required("Requiered value"),
+  address: Yup.string().required("Requiered value"),
   phone: Yup.string()
     .matches(/^[0-9+\-\s()]+$/, "Requiered validate number")
     .required("Requiered value"),
 });
+
+export const RegisterInitialValues: RegisterFormData = {
+  email: "",
+  password: "",
+  confirmPassword: "",
+  name: "",
+  address: "",
+  phone: "",
+};

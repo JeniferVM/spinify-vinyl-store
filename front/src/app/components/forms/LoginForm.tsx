@@ -4,13 +4,17 @@ import {
   LoginInitialValues,
   LoginValSchema,
 } from "@/app/helpers/validators/formsSchema";
+import { postLogin } from "@/app/Services/auth.serv";
 
 function LoginForm() {
   const formik = useFormik<typeof LoginInitialValues>({
     initialValues: LoginInitialValues,
     validationSchema: LoginValSchema,
-    onSubmit: () => {
-      console.log("login exitoso");
+    onSubmit: async (values, { resetForm }) => {
+      const res = await postLogin(values);
+      console.log("Heres the ", res);
+
+      resetForm();
     },
   });
 

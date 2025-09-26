@@ -4,13 +4,17 @@ import {
   RegisterInitialValues,
   RegisterValSchema,
 } from "@/app/helpers/validators/formsSchema";
+import { postRegister } from "@/app/Services/auth.serv";
 
 function RegisterForm() {
   const formik = useFormik<typeof RegisterInitialValues>({
     initialValues: RegisterInitialValues,
     validationSchema: RegisterValSchema,
-    onSubmit: () => {
-      console.log("register exitoso");
+    onSubmit: async (values, { resetForm }) => {
+      const res = await postRegister(values);
+      console.log("Here's the ", res);
+
+      resetForm();
     },
   });
 
@@ -62,15 +66,15 @@ function RegisterForm() {
           <div className="text-burnt-orange text-sm">{formik.errors.name}</div>
         )}
         <InputField
-          label="Adress"
+          label="Address"
           type="string"
-          name="adress"
-          value={formik.values.adress}
+          name="address"
+          value={formik.values.address}
           onChange={formik.handleChange}
         />
-        {formik.errors.adress && (
+        {formik.errors.address && (
           <div className="text-burnt-orange text-sm">
-            {formik.values.adress}
+            {formik.values.address}
           </div>
         )}
         <InputField
