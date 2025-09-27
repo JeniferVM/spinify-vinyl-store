@@ -32,7 +32,7 @@ export default function ProductDetail() {
     <div>
       <div className="flex justify-around items-center px-6 mt-20 mb-9">
         <Link
-          href="products"
+          href="/products"
           className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-orange/30 hover:border-custume-orange/60 transition-all duration-300 hover:scale-105 hover:bg-custume-orange/10"
         >
           <div className="relative">

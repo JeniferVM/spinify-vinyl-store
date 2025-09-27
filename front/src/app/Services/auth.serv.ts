@@ -5,7 +5,7 @@ import {
 
 export const postRegister = async (userData: RegisterFormData) => {
   try {
-    const res = await fetch("http://localhost:3000/users/register", {
+    const registerRes = await fetch("http://localhost:3000/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -13,10 +13,10 @@ export const postRegister = async (userData: RegisterFormData) => {
       body: JSON.stringify(userData),
     });
 
-    if (res.ok) {
-      return await res.json();
+    if (registerRes.ok) {
+      return await registerRes.json();
     } else {
-      const errorData = await res.json();
+      const errorData = await registerRes.json();
       throw new Error(errorData.message || "Error Register");
     }
   } catch (error) {
@@ -27,7 +27,7 @@ export const postRegister = async (userData: RegisterFormData) => {
 
 export const postLogin = async (userData: LoginFormData) => {
   try {
-    const res = await fetch("http://localhost:3000/users/login", {
+    const loginRes = await fetch("http://localhost:3000/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,10 +35,10 @@ export const postLogin = async (userData: LoginFormData) => {
       body: JSON.stringify(userData),
     });
 
-    if (res.ok) {
-      return await res.json();
+    if (loginRes.ok) {
+      return await loginRes.json();
     } else {
-      const errorData = await res.json();
+      const errorData = await loginRes.json();
       throw new Error(errorData.message || "Error Login");
     }
   } catch (error) {

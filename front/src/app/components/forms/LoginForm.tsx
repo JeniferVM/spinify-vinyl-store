@@ -5,16 +5,29 @@ import {
   LoginValSchema,
 } from "@/app/helpers/validators/formsSchema";
 import { postLogin } from "@/app/Services/auth.serv";
+import { useAuth } from "@/app/context/authContext";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
+  const { setDataUser } = useAuth();
+  const router = useRouter();
+
   const formik = useFormik<typeof LoginInitialValues>({
     initialValues: LoginInitialValues,
     validationSchema: LoginValSchema,
     onSubmit: async (values, { resetForm }) => {
-      const res = await postLogin(values);
-      console.log("Heres the ", res);
-
-      resetForm();
+      try {
+        const res = await postLogin(values);
+        if (res && res.login) {
+          setDataUser(res);
+          router.push("/");
+        } else {
+        }
+        resetForm();
+      } catch (error) {
+        console.error("❌ Error durante login:", error);
+        // Manejar errores aquí
+      }
     },
   });
 
