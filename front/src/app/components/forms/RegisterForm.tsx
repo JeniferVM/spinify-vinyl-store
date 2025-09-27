@@ -5,16 +5,26 @@ import {
   RegisterValSchema,
 } from "@/app/helpers/validators/formsSchema";
 import { postRegister } from "@/app/Services/auth.serv";
+import { useRouter } from "next/navigation";
 
 function RegisterForm() {
+  const router = useRouter();
+
   const formik = useFormik<typeof RegisterInitialValues>({
     initialValues: RegisterInitialValues,
     validationSchema: RegisterValSchema,
     onSubmit: async (values, { resetForm }) => {
-      const res = await postRegister(values);
-      console.log("Here's the ", res);
+      try {
+        const res = await postRegister(values);
+        if (res) {
+          router.push("/login");
+        }
 
-      resetForm();
+        resetForm();
+      } catch (error) {
+        console.error("❌ Error durante login:", error);
+        // Manejar errores aquí
+      }
     },
   });
 

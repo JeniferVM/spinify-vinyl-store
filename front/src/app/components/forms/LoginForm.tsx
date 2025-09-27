@@ -20,7 +20,7 @@ function LoginForm() {
         const res = await postLogin(values);
         if (res && res.login) {
           setDataUser(res);
-          router.push("/");
+          router.push("/home");
         } else {
         }
         resetForm();

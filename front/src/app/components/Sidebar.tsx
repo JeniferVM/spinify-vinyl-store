@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { navItems } from "../helpers/navItems";
+import { navItems, PATHROUTES } from "../helpers/navItems";
+import { useState } from "react";
+import { useAuth } from "../context/authContext";
 
 interface SideBarProps {
   isOpen: boolean;
@@ -8,6 +12,9 @@ interface SideBarProps {
 }
 
 const Sidebar = ({ isOpen, onClose }: SideBarProps) => {
+  const [isClient, setIsClient] = useState(false);
+  const { dataUser, logout } = useAuth();
+
   if (!isOpen) return null;
 
   return (
@@ -63,6 +70,24 @@ const Sidebar = ({ isOpen, onClose }: SideBarProps) => {
             </Link>
           ))}
         </nav>
+        {dataUser ? (
+          <div className="mt-auto">
+            <button
+              onClick={() => logout()}
+              className="w-full relative px-6 py-3 text-custume-orange text-lg font-medium transition-all duration-300 rounded-xl hover:bg-custume-orange/10 hover:scale-105 group overflow-hidden border border-custume-orange/30 hover:border-custume-orange/60"
+            >
+              <span className="relative z-10">Log Out</span>
+              <div className="absolute inset-0 bg-custume-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
+          </div>
+        ) : (
+          <Link
+            href={PATHROUTES.HOME}
+            className="block transition-all duration-500 hover:scale-105"
+          >
+            {" "}
+          </Link>
+        )}
       </aside>
     </>
   );
