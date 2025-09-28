@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./context/authContext";
+import { CartProvider } from "./context/cartContext";
 
 const geistheebo = Heebo({
   variable: "--font-hebbo",
@@ -39,11 +40,13 @@ export default function RootLayout({
         className={`${geistheebo.variable} ${geistroboto.variable} ${geistSignika.variable} antialiased`}
       >
         <AuthProvider>
-          <>
-            <NavBar />
-            {children}
-            <Footer />
-          </>
+          <CartProvider>
+            <>
+              <NavBar />
+              {children}
+              <Footer />
+            </>
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

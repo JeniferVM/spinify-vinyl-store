@@ -17,7 +17,7 @@ const AuthContext = createContext<AuthProps>({
 });
 
 interface AuthProviderProps {
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
@@ -41,6 +41,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setDataUser(null);
     if (typeof window !== "undefined" && window.localStorage) {
       localStorage.removeItem("userSession");
+      localStorage.removeItem("cartItems");
     }
   };
 

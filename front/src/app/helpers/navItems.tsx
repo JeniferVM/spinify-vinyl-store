@@ -1,20 +1,13 @@
 export enum PATHROUTES {
   HOME = "/home",
   PRODUCTS = "/products",
-  CART = "/cart",
+  CART = "/cartPage",
   LOGIN = "/login",
   REGISTER = "/register",
+  DASHBOARD = "/dashboard",
 }
 
 export const navItems = [
-  {
-    name: "Products",
-    route: PATHROUTES.PRODUCTS,
-  },
-  {
-    name: "Cart",
-    route: PATHROUTES.CART,
-  },
   {
     name: "Login",
     route: PATHROUTES.LOGIN,
@@ -22,5 +15,13 @@ export const navItems = [
   {
     name: "Register",
     route: PATHROUTES.REGISTER,
+  },
+  {
+    name: "Products",
+    route: PATHROUTES.PRODUCTS,
+  },
+  {
+    name: "Cart",
+    route: PATHROUTES.CART,
   },
 ];

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { navItems, PATHROUTES } from "../helpers/navItems";
-import { useState } from "react";
 import { useAuth } from "../context/authContext";
 
 interface SideBarProps {
@@ -12,7 +11,6 @@ interface SideBarProps {
 }
 
 const Sidebar = ({ isOpen, onClose }: SideBarProps) => {
-  const [isClient, setIsClient] = useState(false);
   const { dataUser, logout } = useAuth();
 
   if (!isOpen) return null;
@@ -42,7 +40,6 @@ const Sidebar = ({ isOpen, onClose }: SideBarProps) => {
             className="group relative p-3 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-110 hover:rotate-90"
           >
             <div className="absolute inset-0 rounded-full bg-custume-orange/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
             <Image
               src="/assets/close.png"
               alt="close"
@@ -52,6 +49,22 @@ const Sidebar = ({ isOpen, onClose }: SideBarProps) => {
             />
           </button>
         </div>
+        <nav className="flex-row justify-center pb-10 ">
+          <Link href={PATHROUTES.DASHBOARD} className="m-4">
+            <button className="group relative p-3 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-110 hover:rotate-360 border border-custume-orange/30 hover:border-custume-orange/60">
+              <div className="absolute inset-0 rounded-full bg-custume-orange/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Image
+                src="/assets/User.png"
+                alt="userLogo"
+                width={100}
+                height={100}
+                onClick={onClose}
+                className="relative z-10 transition-all duration-300 group-hover:brightness-125"
+              />{" "}
+            </button>
+          </Link>
+          <p className="text-burnt-orange mt-3 ml-10">Your profile</p>
+        </nav>
         <nav className="flex flex-col gap-2">
           {navItems.map((navigatorByItem, index) => (
             <Link
@@ -84,9 +97,7 @@ const Sidebar = ({ isOpen, onClose }: SideBarProps) => {
           <Link
             href={PATHROUTES.HOME}
             className="block transition-all duration-500 hover:scale-105"
-          >
-            {" "}
-          </Link>
+          ></Link>
         )}
       </aside>
     </>

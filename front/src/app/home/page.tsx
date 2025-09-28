@@ -8,36 +8,46 @@ export default function Home() {
   return (
     <div className="space-y-8 pb-8">
       <div className="flex justify-around items-center px-6 mt-20">
-        <Link
-          href="products"
-          className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-orange/30 hover:border-custume-orange/60 transition-all duration-300 hover:scale-105 hover:bg-custume-orange/10"
-        >
-          <div className="relative">
+        <div className="flex justify-around items-center">
+          <Link
+            href="/products"
+            className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-orange/30 hover:border-custume-orange/60 transition-all duration-300 hover:scale-105 hover:bg-custume-orange/10"
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-custume-orange/30 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+
+            <span className="text-2xl text-custume-orange group-hover:text-orange-400 font-medium transition-colors duration-300">
+              all products
+            </span>
+          </Link>
+
+          <Link
+            href="/cartPage"
+            className="group flex items-center gap-3 ml-10 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-light/30 hover:border-custume-light/60 transition-all duration-300 hover:scale-105 hover:bg-custume-light/10"
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-custume-light/30 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+
+            <span className="text-2xl text-custume-light group-hover:text-light-400 font-medium transition-colors duration-300">
+              my cart
+            </span>
+          </Link>
+        </div>
+
+        <div>
+          <button className="group p-4 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 hover:bg-white/10">
             <Image
-              src="/assets/ShortLogo.png"
-              alt="ShortLogo"
-              width={25}
-              height={25}
-              className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
+              src="/assets/Search.png"
+              alt="SearchBar"
+              width={28}
+              height={28}
+              className="transition-all duration-300 group-hover:brightness-125"
             />
-            <div className="absolute inset-0 bg-custume-orange/30 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-
-          <span className="text-2xl text-custume-orange group-hover:text-orange-400 font-medium transition-colors duration-300">
-            all products
-          </span>
-        </Link>
-
-        <button className="group p-4 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 hover:bg-white/10">
-          <Image
-            src="/assets/Search.png"
-            alt="SearchBar"
-            width={28}
-            height={28}
-            className="transition-all duration-300 group-hover:brightness-125"
-          />
-          <div className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-300"></div>
-        </button>
+            <div className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-300"></div>
+          </button>
+        </div>
       </div>
 
       <div className="relative w-3/4 mx-auto">

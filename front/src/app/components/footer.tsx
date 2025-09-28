@@ -11,15 +11,15 @@ const Footer = () => {
 
         <div className="flex flex-col items-center lg:items-end gap-6">
           <div className="flex gap-4">
-            <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+            <button className="w-16 h-16 bg-white rounded-xl flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
               <span className="text-orange-500 text-2xl font-bold">i</span>
-            </div>
-            <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+            </button>
+            <button className="w-16 h-16 bg-white rounded-xl flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
               <span className="text-orange-500 text-2xl font-bold">X</span>
-            </div>
-            <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
+            </button>
+            <button className="w-16 h-16 bg-white rounded-xl flex items-center justify-center hover:bg-gray-200 transition-colors cursor-pointer">
               <span className="text-orange-500 text-2xl font-bold">S</span>
-            </div>
+            </button>
           </div>
           <p className="text-custume-orange text-xl font-medium">@S.pinify</p>
         </div>

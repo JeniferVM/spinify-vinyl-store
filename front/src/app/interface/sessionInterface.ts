@@ -4,9 +4,10 @@ export interface sessionInterface {
   user: {
     name: string;
     email: string;
-    adress: string;
+    address: string;
     phone: string;
     orders: [];
+    wishList: [];
     id: number;
   };
 }
