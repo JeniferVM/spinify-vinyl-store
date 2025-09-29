@@ -6,22 +6,22 @@ import { useAuth } from "./authContext";
 
 interface CartProps {
   cartItems: productInterface[];
-  getItemId: () => number[];
+  getItemsId: () => number[];
   addCart: (product: productInterface) => void;
   removeCart: (productId: number) => void;
   clearCart: () => void;
-  getTotal: () => number; // ✅ Correcto
-  getItemCount: () => number; // ✅ Corregido de void a number
+  getTotal: () => number;
+  getItemCount: () => number;
 }
 
 const CartContext = createContext<CartProps>({
   cartItems: [],
-  getItemId: () => [],
+  getItemsId: () => [],
   addCart: () => {},
   removeCart: () => {},
   clearCart: () => {},
-  getTotal: () => 0, // ✅ Valor por defecto consistente
-  getItemCount: () => 0, // ✅ Valor por defecto consistente
+  getTotal: () => 0,
+  getItemCount: () => 0,
 });
 
 interface CartProviderProps {
@@ -34,7 +34,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   console.log("🛒 CartProvider - cartItems:", cartItems.length);
 
-  // Escuchar evento de logout
   useEffect(() => {
     const handleLogout = () => {
       console.log("🛒 CartProvider escuchó logout, limpiando cart");
@@ -47,13 +46,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   }, []);
 
-  // Limpiar cart cuando el usuario se desloguee
   useEffect(() => {
     if (!dataUser && cartItems.length > 0) {
       console.log("🧹 Usuario deslogueado, limpiando cart");
       clearCart();
     }
-  }, [dataUser]);
+  }, [dataUser, cartItems.length]);
 
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -70,7 +68,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const getItemId = (): number[] => {
+  const getItemsId = (): number[] => {
     return cartItems.map((item) => item.id);
   };
 
@@ -82,11 +80,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
     const productExist = cartItems?.some((item) => item.id === product.id);
     if (productExist) {
-      console.warn("⚠️ Producto ya existe en el cart");
       return;
     }
 
-    console.log("✅ Agregando producto al cart:", product.name);
     setCartItems((prevItems) => [...prevItems, product]);
   };
 
@@ -106,12 +102,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const getTotal = (): number => {
-    // ✅ Tipo explícito
     return cartItems.reduce((total, item) => total + item.price, 0);
   };
 
   const getItemCount = (): number => {
-    // ✅ Tipo explícito corregido
     return cartItems.length;
   };
 
@@ -119,7 +113,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     <CartContext.Provider
       value={{
         cartItems,
-        getItemId,
+        getItemsId,
         addCart,
         removeCart,
         clearCart,

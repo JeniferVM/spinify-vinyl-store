@@ -5,11 +5,32 @@ import { useAuth } from "../context/authContext";
 import Image from "next/image";
 import Link from "next/link";
 import { PATHROUTES } from "../helpers/navItems";
+import { createOrder } from "../Services/orders.serv";
 
 export default function Cart() {
-  const { cartItems, clearCart, getItemCount, getTotal, removeCart } =
-    useCart();
+  const {
+    cartItems,
+    clearCart,
+    getItemCount,
+    getItemsId,
+    getTotal,
+    removeCart,
+  } = useCart();
   const { dataUser } = useAuth();
+
+  const handleCheckOut = async () => {
+    const itemIds = getItemsId();
+    const token = dataUser?.token;
+    if (!token) {
+      return;
+    }
+    try {
+      await createOrder(itemIds, token);
+      clearCart();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
 
   if (!dataUser) {
     return (
@@ -161,7 +182,10 @@ export default function Cart() {
               </div>
 
               <div className="space-y-3">
-                <button className="w-full px-6 py-4 bg-custume-orange text-black text-lg font-bold rounded-xl hover:bg-custume-orange/90 hover:scale-105 transition-all duration-300">
+                <button
+                  className="w-full px-6 py-4 bg-custume-orange text-black text-lg font-bold rounded-xl hover:bg-custume-orange/90 hover:scale-105 transition-all duration-300"
+                  onClick={handleCheckOut}
+                >
                   Check out
                 </button>
 

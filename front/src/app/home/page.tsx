@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import newArrivals from "../helpers/newArrivals";
 import bestSellers from "../helpers/bestSellers";
 import ProductCard from "../components/ProductCard";
 import Link from "next/link";
+import { useAuth } from "../context/authContext";
 
 export default function Home() {
+  const { dataUser } = useAuth();
   return (
     <div className="space-y-8 pb-8">
       <div className="flex justify-around items-center px-6 mt-20">
@@ -21,19 +25,20 @@ export default function Home() {
               all products
             </span>
           </Link>
+          {dataUser && (
+            <Link
+              href="/cartPage"
+              className="group flex items-center gap-3 ml-10 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-light/30 hover:border-custume-light/60 transition-all duration-300 hover:scale-105 hover:bg-custume-light/10"
+            >
+              <div className="relative">
+                <div className="absolute inset-0 bg-custume-light/30 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
 
-          <Link
-            href="/cartPage"
-            className="group flex items-center gap-3 ml-10 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-light/30 hover:border-custume-light/60 transition-all duration-300 hover:scale-105 hover:bg-custume-light/10"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-custume-light/30 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-
-            <span className="text-2xl text-custume-light group-hover:text-light-400 font-medium transition-colors duration-300">
-              my cart
-            </span>
-          </Link>
+              <span className="text-2xl text-custume-light group-hover:text-light-400 font-medium transition-colors duration-300">
+                my cart
+              </span>
+            </Link>
+          )}
         </div>
 
         <div>
