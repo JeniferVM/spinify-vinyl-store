@@ -2,6 +2,7 @@
 
 import { useCart } from "../context/cartContext";
 import { useAuth } from "../context/authContext";
+import { useToast } from "../context/toastContext";
 import Image from "next/image";
 import Link from "next/link";
 import { PATHROUTES } from "../helpers/navItems";
@@ -16,20 +17,39 @@ export default function Cart() {
     getTotal,
     removeCart,
   } = useCart();
-  const { dataUser } = useAuth();
+  const { dataUser, refreshUser } = useAuth();
+  const { showToast } = useToast();
 
   const handleCheckOut = async () => {
     const itemIds = getItemsId();
     const token = dataUser?.token;
     if (!token) {
+      showToast("You need to log in to checkout", "error");
       return;
     }
     try {
       await createOrder(itemIds, token);
+      await refreshUser();
       clearCart();
+      showToast("Your order has been placed!", "success");
     } catch (error) {
       console.log("Error: ", error);
+      showToast("Something went wrong while processing your order", "error");
     }
+  };
+
+  const handleRemove = (id: string, name: string) => {
+    showToast(`${name} removed from cart!`, "error");
+    setTimeout(() => {
+      removeCart(Number(id));
+    }, 100);
+  };
+
+  const handleClearCart = () => {
+    showToast("Cart cleared!", "info");
+    setTimeout(() => {
+      clearCart();
+    }, 100);
   };
 
   if (!dataUser) {
@@ -129,13 +149,14 @@ export default function Cart() {
                     </p>
 
                     <div className="flex items-center justify-between">
-                      <div className="text-2xl font-bold text-custume-orange">
+                      <span className="text-2xl font-bold text-custume-orange">
                         ${item.price}
-                      </div>
-
+                      </span>
                       <button
-                        onClick={() => removeCart(item.id)}
-                        className="px-4 py-2 text-red-400 text-sm font-medium rounded-xl border border-red-400/30 hover:bg-red-400/10 hover:scale-105 transition-all duration-300"
+                        onClick={() =>
+                          handleRemove(item.id.toString(), item.name)
+                        }
+                        className="px-4 py-2 text-sm font-medium rounded-xl border border-custume-orange text-custume-orange hover:bg-custume-orange hover:text-white transition-all"
                       >
                         X
                       </button>
@@ -153,7 +174,6 @@ export default function Cart() {
               <div className="space-y-4 mb-6">
                 <div className="space-y-2">
                   <span className="text-white/70 text-m font-bold">
-                    {" "}
                     Products ({getItemCount()})
                   </span>
                   <div className="max-h-32 overflow-y-auto space-y-1">
@@ -183,14 +203,14 @@ export default function Cart() {
 
               <div className="space-y-3">
                 <button
-                  className="w-full px-6 py-4 bg-custume-orange text-black text-lg font-bold rounded-xl hover:bg-custume-orange/90 hover:scale-105 transition-all duration-300"
+                  className="w-full px-6 py-4 bg-custume-orange text-black text-lg font-bold rounded-xl hover:bg-custume-orange/90 hover:text-white hover:scale-105 transition-all duration-300"
                   onClick={handleCheckOut}
                 >
                   Check out
                 </button>
 
                 <button
-                  onClick={clearCart}
+                  onClick={handleClearCart}
                   className="w-full px-6 py-3 text-white/70 text-sm font-medium rounded-xl border border-white/20 hover:bg-white/5 hover:text-white transition-all duration-300"
                 >
                   Clear Cart

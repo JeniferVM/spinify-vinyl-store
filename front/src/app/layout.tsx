@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./context/authContext";
 import { CartProvider } from "./context/cartContext";
+import { ToastProvider } from "./context/toastContext";
 
 const geistheebo = Heebo({
   variable: "--font-hebbo",
@@ -39,15 +40,15 @@ export default function RootLayout({
       <body
         className={`${geistheebo.variable} ${geistroboto.variable} ${geistSignika.variable} antialiased`}
       >
-        <AuthProvider>
-          <CartProvider>
-            <>
+        <ToastProvider>
+          <AuthProvider>
+            <CartProvider>
               <NavBar />
               {children}
               <Footer />
-            </>
-          </CartProvider>
-        </AuthProvider>
+            </CartProvider>
+          </AuthProvider>
+        </ToastProvider>
       </body>
     </html>
   );

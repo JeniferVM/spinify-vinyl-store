@@ -32,11 +32,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const { dataUser } = useAuth();
   const [cartItems, setCartItems] = useState<productInterface[]>([]);
 
-  console.log("🛒 CartProvider - cartItems:", cartItems.length);
-
   useEffect(() => {
     const handleLogout = () => {
-      console.log("🛒 CartProvider escuchó logout, limpiando cart");
       setCartItems([]);
     };
 
@@ -48,7 +45,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (!dataUser && cartItems.length > 0) {
-      console.log("🧹 Usuario deslogueado, limpiando cart");
       clearCart();
     }
   }, [dataUser, cartItems.length]);
@@ -74,7 +70,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const addCart = (product: productInterface) => {
     if (!dataUser) {
-      console.warn("⚠️ Usuario no logueado, no se puede agregar al cart");
       return;
     }
 
@@ -87,14 +82,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const removeCart = (productId: number) => {
-    console.log("🗑️ Removiendo producto del cart:", productId);
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== productId)
     );
   };
 
   const clearCart = () => {
-    console.log("🧹 Limpiando cart completo");
     setCartItems([]);
     if (typeof window !== "undefined" && window.localStorage) {
       localStorage.removeItem("cart");

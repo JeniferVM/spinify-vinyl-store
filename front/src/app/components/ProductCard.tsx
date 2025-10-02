@@ -3,19 +3,29 @@
 import Image from "next/image";
 import productInterface from "../interface/productInterface";
 import { useCart } from "../context/cartContext";
+import { useToast } from "../context/toastContext";
 
 interface CardProps {
   product: productInterface;
 }
 
 export const ProductCard = ({ product }: CardProps) => {
-  const { addCart } = useCart();
+  const { addCart, cartItems } = useCart();
+  const { showToast } = useToast();
+
   const handleAddCart = () => {
     if (product) {
-      addCart(product);
-      // agregar alerta de producto agregado
+      const isInCart = cartItems.some((item) => item.id === product.id);
+
+      if (isInCart) {
+        showToast(`${product.name} is already in your cart!`, "error");
+      } else {
+        addCart(product);
+        showToast(`${product.name} added to cart!`, "success");
+      }
     }
   };
+
   return (
     <div className="group w-80 h-auto bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:bg-black/40 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-2xl p-6">
       <div className="relative overflow-hidden rounded-xl mb-4">

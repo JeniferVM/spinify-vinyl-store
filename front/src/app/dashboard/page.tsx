@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { useAuth } from "../context/authContext";
-import { PATHROUTES } from "../helpers/navItems";
+// import { PATHROUTES } from "../helpers/navItems";
+// import orderInterface from "../interface/orderInerface";
 
 export default function Dashboard() {
   const { dataUser, logout } = useAuth();
@@ -11,6 +12,14 @@ export default function Dashboard() {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-white text-xl">Cargando...</div>
+      </div>
+    );
+  }
+
+  if (!dataUser.user.orders) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white text-xl">No orders</div>
       </div>
     );
   }
@@ -80,7 +89,7 @@ export default function Dashboard() {
           </div>
         </section>
 
-        <section className="relative">
+        {/* <section className="relative">
           <div className="bg-gradient-to-br from-black/60 via-black/40 to-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-custume-orange/5">
             <h3 className="text-2xl font-semibold mb-6 text-custume-orange">
               Your orders
@@ -91,6 +100,24 @@ export default function Dashboard() {
                 <p className="text-white/70">
                   You actually have {dataUser.user.orders.length} orders
                 </p>
+                <div>
+                  <h2 className="text-custume-orange text-2xl mb-4">
+                    Mis Órdenes: {dataUser.user.orders.length}
+                  </h2>
+
+                  {dataUser.user.orders.map((order: orderInterface) => (
+                    <div
+                      key={order.id}
+                      className="bg-white/10 p-4 rounded mb-2"
+                    >
+                      <p className="text-white">Orden #{order.id}</p>
+                      <p className="text-gray-300">Estado: {order.status}</p>
+                      <p className="text-gray-400 text-sm">
+                        {new Date(order.date).toLocaleString("es-MX")}
+                      </p>
+                    </div>
+                  ))}
+                </div>{" "}
               </div>
             ) : (
               <div className="text-center py-8">
@@ -107,9 +134,9 @@ export default function Dashboard() {
               </div>
             )}
           </div>
-        </section>
+        </section> */}
 
-        <section className="relative">
+        {/* <section className="relative">
           <div className="bg-gradient-to-br from-black/60 via-black/40 to-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-custume-orange/5">
             <h3 className="text-2xl font-semibold mb-6 text-custume-orange">
               Your wish list
@@ -136,7 +163,7 @@ export default function Dashboard() {
               </div>
             )}
           </div>
-        </section>
+        </section> */}
 
         <section className="flex justify-center">
           <button

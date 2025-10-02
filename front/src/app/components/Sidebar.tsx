@@ -40,13 +40,16 @@ const Sidebar = ({ isOpen, onClose }: SideBarProps) => {
             className="group relative p-3 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-110 hover:rotate-90"
           >
             <div className="absolute inset-0 rounded-full bg-custume-orange/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <Image
-              src="/assets/close.png"
+            {/* <Image
+              src="/assets/close.psng"
               alt="close"
               width={24}
               height={24}
               className="relative z-10 transition-all duration-300 group-hover:brightness-125"
-            />
+            /> */}
+            <p className="text-white relative z-10 transition-all duration-300 group-hover:brightness-125">
+              x
+            </p>
           </button>
         </div>
         <nav className="flex-row justify-center pb-10 ">

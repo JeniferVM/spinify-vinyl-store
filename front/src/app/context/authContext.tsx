@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 interface AuthProps {
   dataUser: sessionInterface | null;
   setDataUser: (dataUser: sessionInterface | null) => void;
+  refreshUser: () => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthProps>({
   dataUser: null,
   setDataUser: () => {},
+  refreshUser: () => {},
   logout: () => {},
 });
 
@@ -45,9 +47,33 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const refreshUser = async () => {
+    if (!dataUser?.token) return;
+
+    try {
+      const res = await fetch("http://localhost:3000/users/profile", {
+        headers: {
+          Authorization: dataUser.token,
+        },
+      });
+
+      if (res.ok) {
+        const userData = await res.json();
+        setDataUser({
+          ...dataUser,
+          user: userData,
+        });
+      }
+    } catch (error) {
+      console.error("Error refrescando usuario:", error);
+    }
+  };
+
   return (
     <div>
-      <AuthContext.Provider value={{ dataUser, setDataUser, logout }}>
+      <AuthContext.Provider
+        value={{ dataUser, setDataUser, logout, refreshUser }}
+      >
         {children}
       </AuthContext.Provider>
     </div>
