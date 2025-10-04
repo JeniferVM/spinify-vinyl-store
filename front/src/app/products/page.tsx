@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getAllProducts } from "../Services/prod.serv";
 import { ProductsList } from "../components/ProductList";
+import ProdMenu from "../components/ProdMenu";
 
 export default async function ProductsPage() {
   const allProducts = await getAllProducts();
@@ -32,10 +33,12 @@ export default async function ProductsPage() {
             <div className="absolute top-4 right-4 w-3 h-3 bg-custume-orange rounded-full opacity-80 animate-pulse"></div>
           </div>
         </div>
-
-        <div className="relative w-3/4 mx-auto mt-5">
-          <div className="h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
+        <div className="mt-20">
+          <ProdMenu />
+          <div className="relative w-3/4 mx-auto mt-5">
+            <div className="h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
+          </div>
         </div>
       </div>
       <ProductsList products={allProducts} />

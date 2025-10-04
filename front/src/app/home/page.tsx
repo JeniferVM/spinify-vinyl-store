@@ -1,48 +1,21 @@
 "use client";
 
-import Image from "next/image";
 import newArrivals from "../helpers/newArrivals";
 import bestSellers from "../helpers/bestSellers";
 import ProductCard from "../components/ProductCard";
-import Link from "next/link";
-import { useAuth } from "../context/authContext";
+import ProdMenu from "../components/ProdMenu";
 
 export default function Home() {
-  const { dataUser } = useAuth();
   return (
     <div className="space-y-8 pb-8">
-      <div className="flex justify-around items-center px-6 mt-20">
-        <div className="flex justify-around items-center">
-          <Link
-            href="/products"
-            className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-orange/30 hover:border-custume-orange/60 transition-all duration-300 hover:scale-105 hover:bg-custume-orange/10"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-custume-orange/30 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-
-            <span className="text-2xl text-custume-orange group-hover:text-orange-400 font-medium transition-colors duration-300">
-              all products
-            </span>
-          </Link>
-          {dataUser && (
-            <Link
-              href="/cartPage"
-              className="group flex items-center gap-3 ml-10 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-light/30 hover:border-custume-light/60 transition-all duration-300 hover:scale-105 hover:bg-custume-light/10"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-custume-light/30 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-
-              <span className="text-2xl text-custume-light group-hover:text-light-400 font-medium transition-colors duration-300">
-                my cart
-              </span>
-            </Link>
-          )}
+      <div className="mt-20">
+        <ProdMenu />
+        <div className="relative w-3/4 mx-auto mt-5">
+          <div className="h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
         </div>
-
-        <div>
-          <button className="group p-4 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 hover:bg-white/10">
+      </div>
+      {/* <button className="group p-4 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 hover:bg-white/10">
             <Image
               src="/assets/Search.png"
               alt="SearchBar"
@@ -51,14 +24,7 @@ export default function Home() {
               className="transition-all duration-300 group-hover:brightness-125"
             />
             <div className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-300"></div>
-          </button>
-        </div>
-      </div>
-
-      <div className="relative w-3/4 mx-auto">
-        <div className="h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
-      </div>
+          </button> */}
 
       <div className="overflow-x-auto scrollbar-hide">
         <div className="flex">

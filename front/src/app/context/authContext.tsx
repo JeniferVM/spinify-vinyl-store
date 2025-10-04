@@ -3,6 +3,8 @@
 import React, { createContext, useContext } from "react";
 import { sessionInterface } from "../interface/sessionInterface";
 import { useEffect, useState } from "react";
+import { PATHROUTES } from "../helpers/navItems";
+import { useRouter } from "next/navigation";
 
 interface AuthProps {
   dataUser: sessionInterface | null;
@@ -23,6 +25,8 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const router = useRouter();
+
   const [dataUser, setDataUser] = useState<sessionInterface | null>(null);
   useEffect(() => {
     if (dataUser) {
@@ -45,6 +49,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.removeItem("userSession");
       localStorage.removeItem("cartItems");
     }
+    router.push(PATHROUTES.HOME);
   };
 
   const refreshUser = async () => {

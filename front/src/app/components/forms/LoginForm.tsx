@@ -7,26 +7,37 @@ import {
 import { postLogin } from "@/app/Services/auth.serv";
 import { useAuth } from "@/app/context/authContext";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/app/context/toastContext";
 
 function LoginForm() {
   const { setDataUser } = useAuth();
   const router = useRouter();
+  const { showToast } = useToast();
 
   const formik = useFormik<typeof LoginInitialValues>({
     initialValues: LoginInitialValues,
     validationSchema: LoginValSchema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
         const res = await postLogin(values);
         if (res && res.login) {
           setDataUser(res);
-          router.push("/home");
+          showToast("Login successful!", "success");
+
+          setTimeout(() => {
+            router.push("/home");
+          }, 2000);
         } else {
         }
         resetForm();
-      } catch (error) {
-        console.error("❌ Error durante login:", error);
-        // Manejar errores aquí
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        const errorMessage =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Login failed. Please try again.";
+        showToast(errorMessage, "error");
+        setSubmitting(false);
       }
     },
   });
@@ -40,6 +51,12 @@ function LoginForm() {
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (formik.touched.email && formik.errors.email) {
+              showToast(formik.errors.email, "error");
+            }
+          }}
         />
         {formik.errors.email && (
           <div className="text-burnt-orange text-sm">{formik.errors.email}</div>
@@ -50,6 +67,12 @@ function LoginForm() {
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (formik.touched.password && formik.errors.password) {
+              showToast(formik.errors.password, "error");
+            }
+          }}
         />
         {formik.errors.password ? (
           <div className="text-burnt-orange text-sm">

@@ -1,22 +1,10 @@
 "use client";
-
-// import Link from "next/link";
 import { useAuth } from "../context/authContext";
-// import { PATHROUTES } from "../helpers/navItems";
-// import orderInterface from "../interface/orderInerface";
 
 export default function Dashboard() {
   const { dataUser, logout } = useAuth();
 
-  if (!dataUser) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white text-xl">Cargando...</div>
-      </div>
-    );
-  }
-
-  if (!dataUser.user.orders) {
+  if (!dataUser?.user.orders) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-white text-xl">No orders</div>
@@ -164,19 +152,15 @@ export default function Dashboard() {
             )}
           </div>
         </section> */}
-
-        <section className="flex justify-center">
+        <div className="mt-auto">
           <button
             onClick={() => logout()}
-            className="group relative px-8 py-4 text-custume-orange text-lg font-medium transition-all duration-300 rounded-xl hover:bg-custume-orange/10 hover:scale-105 overflow-hidden border border-custume-orange/30 hover:border-custume-orange/60"
+            className="w-full relative px-6 py-3 text-custume-orange text-lg font-medium transition-all duration-300 rounded-xl hover:bg-custume-orange/10 hover:scale-105 group overflow-hidden border border-custume-orange/30 hover:border-custume-orange/60"
           >
-            <span className="relative z-10 group-hover:text-custume-orange brightness-110 transition-all duration-300">
-              Close your Spinify account
-            </span>
+            Log Out
             <div className="absolute inset-0 bg-custume-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="absolute inset-0 rounded-xl bg-custume-orange/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </button>
-        </section>
+        </div>
 
         <div className="flex justify-center">
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-custume-orange/50 to-transparent"></div>

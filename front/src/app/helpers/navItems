@@ -1,0 +1,29 @@
+export const PATHROUTES = {
+  HOME: "/home",
+  PRODUCTS: "/products",
+  CART: "/cartPage",
+  LOGIN: "/login",
+  REGISTER: "/register",
+  DASHBOARD: "/dashboard",
+};
+
+export const navItems = [
+  {
+    name: "Login",
+    route: PATHROUTES.LOGIN,
+  },
+  {
+    name: "Register",
+    route: PATHROUTES.REGISTER,
+  },
+  {
+    name: "Products",
+    route: PATHROUTES.PRODUCTS,
+  },
+  {
+    name: "CartPage",
+    route: PATHROUTES.CART,
+  },
+];
+
+export default PATHROUTES;

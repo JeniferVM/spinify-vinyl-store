@@ -7,6 +7,8 @@ const InputField: React.FC<InputsPropsType> = ({
   name,
   value,
   onChange,
+  onBlur,
+  disabled,
 }) => {
   return (
     <div className="mb-4">
@@ -22,6 +24,8 @@ const InputField: React.FC<InputsPropsType> = ({
         type={type}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
+        disabled={disabled}
         className="bg-custume-light font-signika text-2xl mt-3 block w-100 h-10 rounded-md text-black"
       />
     </div>

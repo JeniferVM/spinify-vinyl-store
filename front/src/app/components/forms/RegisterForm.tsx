@@ -6,30 +6,54 @@ import {
 } from "@/app/helpers/validators/formsSchema";
 import { postRegister } from "@/app/Services/auth.serv";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/app/context/toastContext";
+import { useState } from "react";
 
 function RegisterForm() {
   const router = useRouter();
+  const { showToast } = useToast();
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const formik = useFormik<typeof RegisterInitialValues>({
     initialValues: RegisterInitialValues,
     validationSchema: RegisterValSchema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
         const res = await postRegister(values);
         if (res) {
-          router.push("/login");
-        }
+          setIsRegistered(true);
+          showToast(
+            "Registration successful! Redirecting to login...",
+            "success"
+          );
 
+          setTimeout(() => {
+            router.push("/login");
+          }, 2000);
+        } else {
+        }
         resetForm();
-      } catch (error) {
-        console.error("❌ Error durante login:", error);
-        // Manejar errores aquí
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        const errorMessage =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Registration failed. Please try again.";
+        showToast(errorMessage, "error");
+        setSubmitting(false);
       }
     },
   });
 
   return (
     <div>
+      {isRegistered && (
+        <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
+          <p className="font-semibold">Registration Successful!</p>
+          <p className="text-sm">Redirecting you to login page...</p>
+        </div>
+      )}
+
       <form onSubmit={formik.handleSubmit} className="mt-5 mr-30">
         <InputField
           label="Email address"
@@ -37,69 +61,97 @@ function RegisterForm() {
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (formik.touched.email && formik.errors.email) {
+              showToast(formik.errors.email, "error");
+            }
+          }}
+          disabled={isRegistered}
         />
-        {formik.errors.email && (
-          <div className="text-burnt-orange text-sm">{formik.errors.email}</div>
-        )}
+
         <InputField
           label="Password"
           type="password"
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
-        />{" "}
-        {formik.errors.password && (
-          <div className="text-burnt-orange text-sm">
-            {formik.errors.password}
-          </div>
-        )}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (formik.touched.password && formik.errors.password) {
+              showToast(formik.errors.password, "error");
+            }
+          }}
+          disabled={isRegistered}
+        />
+
         <InputField
           label="Confirm Password"
           type="password"
           name="confirmPassword"
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
-        />{" "}
-        {formik.errors.confirmPassword && (
-          <div className="text-burnt-orange text-sm">
-            {formik.errors.confirmPassword}
-          </div>
-        )}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (
+              formik.touched.confirmPassword &&
+              formik.errors.confirmPassword
+            ) {
+              showToast(formik.errors.confirmPassword, "error");
+            }
+          }}
+          disabled={isRegistered}
+        />
+
         <InputField
           label="Name"
           type="text"
           name="name"
           value={formik.values.name}
           onChange={formik.handleChange}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (formik.touched.name && formik.errors.name) {
+              showToast(formik.errors.name, "error");
+            }
+          }}
+          disabled={isRegistered}
         />
-        {formik.errors.name && (
-          <div className="text-burnt-orange text-sm">{formik.errors.name}</div>
-        )}
+
         <InputField
           label="Address"
-          type="string"
+          type="text"
           name="address"
           value={formik.values.address}
           onChange={formik.handleChange}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (formik.touched.address && formik.errors.address) {
+              showToast(formik.errors.address, "error");
+            }
+          }}
+          disabled={isRegistered}
         />
-        {formik.errors.address && (
-          <div className="text-burnt-orange text-sm">
-            {formik.values.address}
-          </div>
-        )}
+
         <InputField
           label="Phone"
           type="text"
           name="phone"
           value={formik.values.phone}
           onChange={formik.handleChange}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (formik.touched.phone && formik.errors.phone) {
+              showToast(formik.errors.phone, "error");
+            }
+          }}
+          disabled={isRegistered}
         />
-        {formik.errors.phone && (
-          <div className="text-burnt-orange text-sm">{formik.values.phone}</div>
-        )}
+
         <button
           type="submit"
-          className="w-100 mt-3 bg-custume-orange text-custume-light py-2 rounded-md hover:bg-burnt-orange"
+          disabled={formik.isSubmitting}
+          className="mt-3 w-100 bg-custume-orange text-custume-light py-2 rounded-md hover:bg-burnt-orange"
         >
           {formik.isSubmitting ? (
             <svg
@@ -119,28 +171,31 @@ function RegisterForm() {
                 fill="black"
               />
             </svg>
+          ) : isRegistered ? (
+            "REGISTERED"
           ) : (
-            "REGISTER"
+            "CREATE ACCOUNT"
           )}
         </button>
+
         <div className="flex items-start mt-5">
           <div className="flex items-center h-5">
             <input
               id="terms"
               type="checkbox"
-              value=""
-              className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+              className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300"
               required
+              disabled={isRegistered}
             />
           </div>
           <label
             htmlFor="terms"
-            className="ms-2 text-sm font-medium text-custume-light dark:text-custume-light"
+            className="ms-2 text-sm font-medium text-custume-light"
           >
             I agree with the{" "}
             <a
               href="https://www.gob.mx/terminos"
-              className="text-custume-light hover:underline dark:text-custume-orange "
+              className="text-custume-light hover:underline dark:text-custume-orange"
             >
               terms and conditions
             </a>
