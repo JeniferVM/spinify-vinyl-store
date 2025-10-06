@@ -6,13 +6,16 @@ import {
   RegisterInitialValues,
   RegisterValSchema,
 } from "@/app/helpers/validators/formsSchema";
-import { postRegister } from "@/app/Services/auth.serv";
+import { postLogin, postRegister } from "@/app/Services/auth.serv";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/app/context/toastContext";
 import { useState } from "react";
+import { useAuth } from "@/app/context/authContext";
+import { PATHROUTES } from "@/app/helpers/navItems";
 
 function RegisterForm() {
   const router = useRouter();
+  const { setDataUser } = useAuth();
   const { showToast } = useToast();
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -21,16 +24,26 @@ function RegisterForm() {
     validationSchema: RegisterValSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
-        const res = await postRegister(values);
-        if (res) {
+        const registerRes = await postRegister(values);
+
+        if (registerRes) {
           setIsRegistered(true);
-          showToast(
-            "Registration successful! Redirecting to login...",
-            "success"
-          );
-          setTimeout(() => router.push("/login"), 1500);
+          showToast("Account created successfully!", "success");
+          const loginResponse = await postLogin({
+            email: values.email,
+            password: values.password,
+          });
+
+          setDataUser(loginResponse);
+
+          showToast("Welcome to Spinify!", "success");
+
+          setTimeout(() => {
+            router.push(PATHROUTES.HOME);
+          }, 1500);
+
+          resetForm();
         }
-        resetForm();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         const errorMessage =
@@ -162,7 +175,7 @@ function RegisterForm() {
         <button
           type="submit"
           disabled={formik.isSubmitting || isRegistered}
-          className="mt-6 w-full bg-custume-orange text-white font-semibold py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 disabled:opacity-60"
+          className="mt-6 w-full bg-black border border-custume-orange/40 text-custume-orange font-semibold py-3 rounded-lg hover:bg-custume-orange/20 transition-all duration-300 disabled:opacity-60"
         >
           {formik.isSubmitting ? (
             <div className="flex justify-center items-center">

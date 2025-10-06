@@ -37,21 +37,24 @@ function NavBar() {
               href={PATHROUTES.HOME}
               className="block transition-all duration-500 hover:scale-105"
             >
-              <div className="relative">
-                <div className="absolute inset-0 rounded-xl bg-custume-orange/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="ml-auto flex relative">
+                <div className="hidden md:flex absolute inset-0 rounded-xl bg-custume-orange/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <Image
-                  src="/assets/LargeLogo.png"
-                  alt="LargeLogo"
-                  width={200}
-                  height={13}
+                  src="/assets/shortLogo.png"
+                  alt="shortLogo"
+                  width={70}
+                  height={70}
                   className="relative z-10 transition-all duration-500 group-hover:brightness-110"
                 />
+                <p className="hidden md:flex items-center text-white text-4xl font-geist-signika font-bold mr-4">
+                  pinify
+                </p>
               </div>
             </Link>
           </section>
 
-          <span className="flex items-center space-x-2">
+          <span className="flex items-center space-x-2 hidden md:flex ">
             {isClient && dataUser ? (
               <div className="flex-row text-2xl font-geist-signika">
                 <span className="text-custume-orange mr-4">

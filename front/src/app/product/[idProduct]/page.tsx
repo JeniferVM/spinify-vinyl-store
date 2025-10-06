@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import productInterface from "../../interface/productInterface";
 import { getProductById } from "../../Services/prod.serv";
 import Image from "next/image";
-import ProductCard from "@/app/components/ProductCard";
 import ProdMenu from "@/app/components/ProdMenu";
+import AddButton from "@/app/components/AddButton";
 
 export default function ProductDetail() {
   const params = useParams();
@@ -23,24 +23,14 @@ export default function ProductDetail() {
   if (!productData) {
     return (
       <div className="p-8">
-        <h1>Cargando producto...</h1>
+        <h1>Loading...</h1>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="mt-20">
-        <ProdMenu />
-        <div className="relative w-3/4 mx-auto mt-5">
-          <div className="h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
-        </div>
-      </div>
-      <div className="relative w-3/4 mx-auto">
-        <div className="h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
-      </div>
+      <ProdMenu />
       <div className="m-20 p-6 h-auto">
         <div className="rounded-lg shadow-lg">
           <div className="md:flex justify-around">
@@ -74,7 +64,7 @@ export default function ProductDetail() {
                   {productData.description}
                 </p>
               </div>
-
+              {/* 
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <span className="text-sm text-gray-500">Stock: </span>
@@ -82,16 +72,15 @@ export default function ProductDetail() {
                     {productData.stock}
                   </span>
                 </div>
+              </div> */}
+              <div className="mt-30">
+                <AddButton product={productData} />
               </div>
-
-              <button className="w-full bg-custume-orange hover:bg-orange-500 text-white font-medium py-3.5 px-4 rounded-xl transition-all duration-300 hover:scale-[0.98] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-custume-orange/50 focus:ring-offset-2 focus:ring-offset-black/20 active:scale-95 group-hover:bg-gradient-to-r group-hover:from-custume-orange group-hover:to-orange-500">
-                Add to Cart
-              </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="overflow-x-auto scrollbar-hide">
+      {/* <div className="overflow-x-auto scrollbar-hide">
         <div className="flex">
           <div className="sticky right-0 z-20 bg-gradient-to-l from-black via-black/95 to-black/80 backdrop-blur-sm flex items-center min-w-fit border-l border-white/10">
             <div className="px-20 py-8 relative" style={{ direction: "ltr" }}>
@@ -108,7 +97,7 @@ export default function ProductDetail() {
             className="flex gap-8 pb-6 pl-8 pr-8"
             style={{ width: "max-content" }}
           >
-            {/* Cambiar por categorias {productData.categoryId} */}
+            Cambiar por categorias {productData.categoryId}
             <div
               key={`new-${productData.categoryId}`}
               className="flex-shrink-0 animate-fade-in"
@@ -117,7 +106,7 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

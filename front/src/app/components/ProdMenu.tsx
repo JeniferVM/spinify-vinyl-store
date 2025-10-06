@@ -8,22 +8,24 @@ export function ProdMenu() {
   const { dataUser } = useAuth();
   const pathname = usePathname();
 
+  const isNotCartPage = !pathname.startsWith("/cart");
   const isNotProductPage = !pathname.startsWith("/product/");
 
   return (
     <div className="sticky top-25 z-50 bg-black">
       <div className="flex flex-col items-center py-4">
         <div className="flex justify-center gap-8 mb-4">
-          <Link
-            href="/products"
-            className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-orange/30 hover:border-custume-orange/60 transition-all duration-300 hover:scale-105 hover:bg-custume-orange/10"
-          >
-            <span className="text-2xl text-custume-orange group-hover:text-orange-400 font-medium transition-colors duration-300">
-              all products
-            </span>
-          </Link>
-
           {dataUser && isNotProductPage && (
+            <Link
+              href="/products"
+              className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-orange/30 hover:border-custume-orange/60 transition-all duration-300 hover:scale-105 hover:bg-custume-orange/10"
+            >
+              <span className="text-2xl text-custume-orange group-hover:text-orange-400 font-medium transition-colors duration-300">
+                all products
+              </span>
+            </Link>
+          )}
+          {dataUser && isNotCartPage && (
             <Link
               href="/cartPage"
               className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-light/30 hover:border-custume-light/60 transition-all duration-300 hover:scale-105 hover:bg-custume-light/10"

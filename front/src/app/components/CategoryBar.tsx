@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../Services/prod.serv";
 import productInterface from "../interface/productInterface";
-import ProductsList from "./ProductList";
+import ProductsList from "../components/ProductList";
 
 const categoriesById = [
   { id: 1, name: "Rock" },
@@ -38,13 +38,24 @@ export default function CategoryBar() {
   return (
     <>
       <div className="sticky top-44 z-50 bg-black flex justify-center flex-wrap gap-4 p-5 mt-8">
+        <button
+          onClick={() => setSelectedCategoryId(null)}
+          className={`bg-black border border-custume-light/40 px-4 py-2 rounded-lg border transition-all hover:bg-custume-light/20 ${
+            selectedCategoryId === null
+              ? "bg-black border border-custume-light/40 text-custume-light"
+              : "bg-transparent text-custume-light border-custume-light"
+          }`}
+        >
+          Todos los productos
+        </button>
+
         {categoriesById.map((cat) => (
           <button
             key={cat.id}
             onClick={() => setSelectedCategoryId(cat.id)}
-            className={`px-4 py-2 rounded-lg border transition-all hover:bg-custume-orange hover:text-white ${
+            className={`px-4 py-2 rounded-lg border transition-all hover:bg-custume-orange/20 ${
               selectedCategoryId === cat.id
-                ? "bg-custume-orange border-custume-orange text-white"
+                ? "bg-transparent border-custume-orange text-custume-orange"
                 : "bg-transparent text-custume-orange border-custume-orange"
             }`}
           >

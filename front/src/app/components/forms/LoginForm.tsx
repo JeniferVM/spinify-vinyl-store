@@ -10,6 +10,7 @@ import { postLogin } from "@/app/Services/auth.serv";
 import { useAuth } from "@/app/context/authContext";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/app/context/toastContext";
+import Link from "next/link";
 
 function LoginForm() {
   const { setDataUser } = useAuth();
@@ -74,7 +75,7 @@ function LoginForm() {
         <button
           type="submit"
           disabled={formik.isSubmitting}
-          className="mt-6 w-full bg-custume-orange text-white font-semibold py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 disabled:opacity-60"
+          className="mt-6 w-full bg-black border border-custume-orange/40 text-custume-orange font-semibold py-3 rounded-lg hover:bg-custume-orange/20 transition-all duration-300 disabled:opacity-60"
         >
           {formik.isSubmitting ? (
             <div className="flex justify-center items-center">
@@ -103,9 +104,12 @@ function LoginForm() {
         <div className="mt-6 text-center text-gray-400">
           <p>
             Don’t have an account?{" "}
-            <span className="text-custume-orange hover:underline cursor-pointer">
+            <Link
+              href="/register"
+              className="font-medium text-current-orange dark:text-custume-orange hover:underline"
+            >
               Register
-            </span>
+            </Link>
           </p>
         </div>
       </form>

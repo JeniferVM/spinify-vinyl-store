@@ -41,7 +41,7 @@ function CheckoutForm() {
         clearCart();
 
         router.push(PATHROUTES.HOME);
-      }, 10000);
+      }, 3000);
     } catch (error) {
       console.log("Error: ", error);
       showToast("Something went wrong while processing your order", "error");

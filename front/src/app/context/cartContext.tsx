@@ -12,6 +12,7 @@ interface CartProps {
   clearCart: () => void;
   getTotal: () => number;
   getItemCount: () => number;
+  updateQuantity: (productId: number, newQuantity: number) => void;
 }
 
 const CartContext = createContext<CartProps>({
@@ -22,6 +23,7 @@ const CartContext = createContext<CartProps>({
   clearCart: () => {},
   getTotal: () => 0,
   getItemCount: () => 0,
+  updateQuantity: () => {},
 });
 
 interface CartProviderProps {
@@ -59,7 +61,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     if (typeof window !== "undefined" && window.localStorage) {
       const cartData = localStorage.getItem("cart");
       if (cartData) {
-        setCartItems(JSON.parse(cartData));
+        const parsedCart = JSON.parse(cartData);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const migratedCart = parsedCart.map((item: any) => ({
+          ...item,
+          quantity: item.quantity || 1,
+        }));
+        setCartItems(migratedCart);
       }
     }
   }, []);
@@ -87,6 +95,19 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     );
   };
 
+  const updateQuantity = (productId: number, newQuantity: number) => {
+    if (newQuantity < 1) {
+      removeCart(productId);
+      return;
+    }
+
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
   const clearCart = () => {
     setCartItems([]);
     if (typeof window !== "undefined" && window.localStorage) {
@@ -95,7 +116,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const getTotal = (): number => {
-    return cartItems.reduce((total, item) => total + item.price, 0);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
   const getItemCount = (): number => {
@@ -112,6 +136,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         clearCart,
         getTotal,
         getItemCount,
+        updateQuantity,
       }}
     >
       {children}
