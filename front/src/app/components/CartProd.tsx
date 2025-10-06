@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useCart } from "../context/cartContext";
 import Image from "next/image";
@@ -78,7 +80,7 @@ export default function CartProd() {
                         handleDecreaseQuantity(
                           item.id,
                           item.name,
-                          item.quantity
+                          item.quantity ?? 0
                         )
                       }
                       className="w-8 h-8 flex items-center justify-center text-custume-orange hover:bg-custume-orange hover:text-white rounded-lg transition-all"
@@ -86,11 +88,11 @@ export default function CartProd() {
                       -
                     </button>
                     <span className="text-white font-medium min-w-[2rem] text-center">
-                      {item.quantity}
+                      {item.quantity ?? 0}
                     </span>
                     <button
                       onClick={() =>
-                        handleIncreaseQuantity(item.id, item.quantity)
+                        handleIncreaseQuantity(item.id, item.quantity ?? 0)
                       }
                       className="w-8 h-8 flex items-center justify-center text-custume-orange hover:bg-custume-orange hover:text-white rounded-lg transition-all"
                     >

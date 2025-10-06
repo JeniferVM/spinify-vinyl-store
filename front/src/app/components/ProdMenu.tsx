@@ -9,13 +9,13 @@ export function ProdMenu() {
   const pathname = usePathname();
 
   const isNotCartPage = !pathname.startsWith("/cart");
-  const isNotProductPage = !pathname.startsWith("/product/");
+  const isNotProductPage = !pathname.startsWith("/products");
 
   return (
     <div className="sticky top-25 z-50 bg-black">
       <div className="flex flex-col items-center py-4">
         <div className="flex justify-center gap-8 mb-4">
-          {dataUser && isNotProductPage && (
+          {isNotProductPage && (
             <Link
               href="/products"
               className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-orange/30 hover:border-custume-orange/60 transition-all duration-300 hover:scale-105 hover:bg-custume-orange/10"

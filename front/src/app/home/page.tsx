@@ -1,15 +1,84 @@
-"use client";
-
+/* eslint-disable react/no-unescaped-entities */
 import newArrivals from "../helpers/newArrivals";
 import bestSellers from "../helpers/bestSellers";
 import ProductCard from "../components/ProductCard";
 import ProdMenu from "../components/ProdMenu";
 import { secondChance } from "../helpers/secondChance";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="space-y-8 pb-8">
       <ProdMenu />
+
+      <div className="max-w-6xl mx-auto px-8 py-16">
+        <div className="relative">
+          <div className="bg-black/40 backdrop-blur-md rounded-2xl p-12 border border-white/10 hover:border-custume-orange/30 transition-all duration-300">
+            <div className="text-center mb-8">
+              <h2 className="text-5xl font-bold text-white mb-2">
+                About <span className="text-custume-orange">Us</span>
+              </h2>
+              <div className="w-24 h-1 bg-custume-orange mx-auto"></div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 mt-12 items-center">
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-2 h-2 bg-custume-orange rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-custume-light text-lg leading-relaxed">
+                    We believe in{" "}
+                    <span className="text-custume-orange font-semibold">
+                      true ownership
+                    </span>{" "}
+                    of music. In an ephemeral digital world, vinyl records
+                    represent something tangible,
+                    <span className="text-white font-medium">
+                      {" "}
+                      something that truly belongs to you
+                    </span>
+                    .
+                  </p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-2 h-2 bg-custume-orange rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-custume-light text-lg leading-relaxed">
+                    More than nostalgia, it's a{" "}
+                    <span className="text-custume-orange font-semibold">
+                      lifestyle
+                    </span>
+                    . It's appreciating the ritual of playing a record, admiring
+                    the cover art, and feeling the{" "}
+                    <span className="text-white font-medium">
+                      analog warmth
+                    </span>{" "}
+                    that no stream can replicate.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex justify-center relative group">
+                <div className="relative rounded-lg overflow-hidden border border-20px border-black/40">
+                  <Image
+                    src="/assets/vinilPic.jpg"
+                    alt="Vintage turntable with vinyl record"
+                    width={350}
+                    height={350}
+                    className="object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110 filter contrast-110 saturate-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-custume-orange/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10 text-center col-span-full">
+              <p className="text-2xl text-custume-orange font-bold italic">
+                "Music isn't rented, it's collected"
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="overflow-x-auto scrollbar-hide">
         <div className="flex">

@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-
 "use client";
 
 import Image from "next/image";
@@ -58,7 +56,7 @@ function NavBar() {
             {isClient && dataUser ? (
               <div className="flex-row text-2xl font-geist-signika">
                 <span className="text-custume-orange mr-4">
-                  {dataUser?.user?.name || "Usuario"} 's
+                  {dataUser?.user?.name || "Usuario"}´s
                 </span>
                 <span className="text-white mr-4"> Collection</span>
               </div>

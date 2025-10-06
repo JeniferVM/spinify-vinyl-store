@@ -3,27 +3,47 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import productInterface from "../../interface/productInterface";
-import { getProductById } from "../../Services/prod.serv";
+import { getProductById, getAllProducts } from "../../Services/prod.serv";
 import Image from "next/image";
 import ProdMenu from "@/app/components/ProdMenu";
 import AddButton from "@/app/components/AddButton";
+import ProductCard from "@/app/components/ProductCard";
 
 export default function ProductDetail() {
   const params = useParams();
   const [productData, setProductData] = useState<productInterface | null>(null);
+  const [allProducts, setAllProducts] = useState<productInterface[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const product = await getProductById(params.idProduct as string);
-      setProductData(product);
+    const fetchData = async () => {
+      try {
+        const product = await getProductById(params.idProduct as string);
+        setProductData(product);
+
+        const products = await getAllProducts();
+        setAllProducts(products);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error loading data:", error);
+        setLoading(false);
+      }
     };
-    fetchProduct();
+    fetchData();
   }, [params.idProduct]);
+
+  const relatedProducts = productData
+    ? allProducts.filter(
+        (product) =>
+          product.categoryId === productData.categoryId &&
+          product.id !== productData.id
+      )
+    : [];
 
   if (!productData) {
     return (
       <div className="p-8">
-        <h1>Loading...</h1>
+        <h1 className="text-white">Loading...</h1>
       </div>
     );
   }
@@ -34,7 +54,7 @@ export default function ProductDetail() {
       <div className="m-20 p-6 h-auto">
         <div className="rounded-lg shadow-lg">
           <div className="md:flex justify-around">
-            <div className=" group w-auto h-120 bg-black/30 backdrop-blur-sm rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:bg-black/40 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-2xl p-6">
+            <div className="group w-auto h-120 bg-black/30 backdrop-blur-sm rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:bg-black/40 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-2xl p-6">
               <Image
                 src={productData.image}
                 alt={productData.name}
@@ -64,7 +84,8 @@ export default function ProductDetail() {
                   {productData.description}
                 </p>
               </div>
-              {/* 
+
+              {/*
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <span className="text-sm text-gray-500">Stock: </span>
@@ -73,6 +94,7 @@ export default function ProductDetail() {
                   </span>
                 </div>
               </div> */}
+
               <div className="mt-30">
                 <AddButton product={productData} />
               </div>
@@ -80,33 +102,40 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
-      {/* <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex">
-          <div className="sticky right-0 z-20 bg-gradient-to-l from-black via-black/95 to-black/80 backdrop-blur-sm flex items-center min-w-fit border-l border-white/10">
-            <div className="px-20 py-8 relative" style={{ direction: "ltr" }}>
-              <h3 className="text-4xl font-bold text-white text-center leading-tight">
-                <span className="text-custume-orange">Find</span> <br />
-                more
-              </h3>
 
-              <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-8 h-px bg-gradient-to-r from-custume-orange to-transparent"></div>
-              <div className="absolute -right-2 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
+      {/* Sección de productos relacionados */}
+      {!loading && relatedProducts.length > 0 && (
+        <div className="overflow-x-auto scrollbar-hide mb-8">
+          <div className="flex">
+            <div className="sticky left-0 z-20 bg-gradient-to-r from-black via-black/95 to-black/80 backdrop-blur-sm flex items-center min-w-fit border-r border-white/10">
+              <div className="px-20 py-8 relative">
+                <h3 className="text-4xl font-bold text-white text-center leading-tight">
+                  similar <br />
+                  <span className="text-custume-orange">products</span>
+                </h3>
+
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-8 h-px bg-gradient-to-r from-custume-orange to-transparent"></div>
+                <div className="absolute -right-2 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
+              </div>
             </div>
-          </div>
-          <div
-            className="flex gap-8 pb-6 pl-8 pr-8"
-            style={{ width: "max-content" }}
-          >
-            Cambiar por categorias {productData.categoryId}
+
             <div
-              key={`new-${productData.categoryId}`}
-              className="flex-shrink-0 animate-fade-in"
+              className="flex gap-8 pb-6 pl-8 pr-8"
+              style={{ width: "max-content" }}
             >
-              <ProductCard product={productData} />
+              {relatedProducts.map((product, index) => (
+                <div
+                  key={product.id}
+                  className="flex-shrink-0 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <ProductCard product={product} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </div> */}
+      )}
     </div>
   );
 }
