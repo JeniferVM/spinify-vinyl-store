@@ -27,3 +27,5 @@ export function ProductsList({ products }: ProductsListProps) {
     </section>
   );
 }
+
+export default ProductsList;

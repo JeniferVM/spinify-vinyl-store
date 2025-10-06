@@ -11,10 +11,10 @@ const InputField: React.FC<InputsPropsType> = ({
   disabled,
 }) => {
   return (
-    <div className="mb-4">
+    <div className="mb-6">
       <label
         htmlFor={name}
-        className="font-signika block text-2xl font-medium text-custume-light"
+        className="font-signika block text-2xl font-medium text-custume-light mb-2"
       >
         {label}
       </label>
@@ -26,7 +26,7 @@ const InputField: React.FC<InputsPropsType> = ({
         onChange={onChange}
         onBlur={onBlur}
         disabled={disabled}
-        className="bg-custume-light font-signika text-2xl mt-3 block w-100 h-10 rounded-md text-black"
+        className="w-full bg-black/50 border border-custume-light/30 focus:border-custume-orange text-white text-lg font-signika rounded-md px-4 py-3 placeholder-gray-400 focus:outline-none transition-all duration-300"
       />
     </div>
   );

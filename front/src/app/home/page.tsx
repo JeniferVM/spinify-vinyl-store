@@ -8,23 +8,7 @@ import ProdMenu from "../components/ProdMenu";
 export default function Home() {
   return (
     <div className="space-y-8 pb-8">
-      <div className="mt-20">
-        <ProdMenu />
-        <div className="relative w-3/4 mx-auto mt-5">
-          <div className="h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
-        </div>
-      </div>
-      {/* <button className="group p-4 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 hover:bg-white/10">
-            <Image
-              src="/assets/Search.png"
-              alt="SearchBar"
-              width={28}
-              height={28}
-              className="transition-all duration-300 group-hover:brightness-125"
-            />
-            <div className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-300"></div>
-          </button> */}
+      <ProdMenu />
 
       <div className="overflow-x-auto scrollbar-hide">
         <div className="flex">

@@ -22,13 +22,14 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="mt-3 absolute inset-0 pointer-events-none overflow-hidden">
         <Image
           src="/assets/VinilIzq.png"
           alt="Vinil"
           width={850}
           height={850}
-          className="absolute right-0 top-0 object-cover"
+          priority
+          className="absolute right-0 top-0 opacity-15 lg:opacity-50 object-contain select-none"
         />
       </div>
     </div>

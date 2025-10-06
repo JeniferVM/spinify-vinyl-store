@@ -110,7 +110,7 @@ export default function ProductDetail() {
           >
             {/* Cambiar por categorias {productData.categoryId} */}
             <div
-              key={`new-${productData.name}`}
+              key={`new-${productData.categoryId}`}
               className="flex-shrink-0 animate-fade-in"
             >
               <ProductCard product={productData} />

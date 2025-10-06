@@ -1,3 +1,5 @@
+"use client";
+
 import InputField from "./Inputs";
 import { useFormik } from "formik";
 import {
@@ -23,11 +25,7 @@ function LoginForm() {
         if (res && res.login) {
           setDataUser(res);
           showToast("Login successful!", "success");
-
-          setTimeout(() => {
-            router.push("/home");
-          }, 2000);
-        } else {
+          setTimeout(() => router.push("/home"), 1500);
         }
         resetForm();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,7 +41,7 @@ function LoginForm() {
   });
 
   return (
-    <div className="mt-40 ml-20">
+    <div className="mt-20 ml-20 w-125 bg-black/40 backdrop-blur-md border border-white/10 p-10 rounded-2xl shadow-lg">
       <form onSubmit={formik.handleSubmit}>
         <InputField
           label="Email"
@@ -51,61 +49,65 @@ function LoginForm() {
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            if (formik.touched.email && formik.errors.email) {
-              showToast(formik.errors.email, "error");
-            }
-          }}
+          onBlur={formik.handleBlur}
         />
         {formik.errors.email && (
-          <div className="text-burnt-orange text-sm">{formik.errors.email}</div>
+          <p className="text-custume-orange text-sm mt-1">
+            {formik.errors.email}
+          </p>
         )}
+
         <InputField
           label="Password"
           type="password"
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            if (formik.touched.password && formik.errors.password) {
-              showToast(formik.errors.password, "error");
-            }
-          }}
+          onBlur={formik.handleBlur}
         />
-        {formik.errors.password ? (
-          <div className="text-burnt-orange text-sm">
+        {formik.errors.password && (
+          <p className="text-custume-orange text-sm mt-1">
             {formik.errors.password}
-          </div>
-        ) : null}
+          </p>
+        )}
+
         <button
           type="submit"
           disabled={formik.isSubmitting}
-          className="mt-3 w-100 bg-custume-orange text-custume-light py-2 rounded-md hover:bg-burnt-orange"
+          className="mt-6 w-full bg-custume-orange text-white font-semibold py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 disabled:opacity-60"
         >
           {formik.isSubmitting ? (
-            <svg
-              aria-hidden="true"
-              role="status"
-              className="inline w-4 h-4 me-3 text-current-light animate-spin dark:text-current-light"
-              viewBox="0 0 100 101"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                fill="currentColor"
-              />
-              <path
-                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                fill="black"
-              />
-            </svg>
+            <div className="flex justify-center items-center">
+              <svg
+                aria-hidden="true"
+                role="status"
+                className="inline w-5 h-5 mr-2 text-white animate-spin"
+                viewBox="0 0 100 101"
+                fill="none"
+              >
+                <path
+                  d="M100 50.59C100 78.20 77.61 100.59 50 100.59C22.39 100.59 0 78.20 0 50.59C0 22.98 22.39 0.59 50 0.59C77.61 0.59 100 22.98 100 50.59ZM9.08 50.59C9.08 73.19 27.40 91.51 50 91.51C72.60 91.51 90.92 73.19 90.92 50.59C90.92 27.99 72.60 9.67 50 9.67C27.40 9.67 9.08 27.99 9.08 50.59Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.96 39.04C96.39 38.40 97.86 35.91 97.00 33.55C95.29 28.82 92.87 24.36 89.81 20.35C85.84 15.12 80.88 10.72 75.21 7.41C69.54 4.10 63.27 1.94 56.76 1.05C51.76 0.36 46.69 0.44 41.73 1.27C39.26 1.69 37.81 4.19 38.45 6.62C39.08 9.04 41.57 10.47 44.05 10.10C47.85 9.55 51.72 9.53 55.54 10.04C60.86 10.77 65.99 12.54 70.63 15.25C75.27 17.96 79.33 21.56 82.58 25.84C84.91 28.91 86.79 32.29 88.18 35.87C89.08 38.21 91.54 39.67 93.96 39.04Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
           ) : (
             "LOG IN"
           )}
         </button>
+
+        <div className="mt-6 text-center text-gray-400">
+          <p>
+            Don’t have an account?{" "}
+            <span className="text-custume-orange hover:underline cursor-pointer">
+              Register
+            </span>
+          </p>
+        </div>
       </form>
     </div>
   );

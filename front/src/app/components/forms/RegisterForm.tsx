@@ -1,3 +1,5 @@
+"use client";
+
 import InputField from "./Inputs";
 import { useFormik } from "formik";
 import {
@@ -26,11 +28,7 @@ function RegisterForm() {
             "Registration successful! Redirecting to login...",
             "success"
           );
-
-          setTimeout(() => {
-            router.push("/login");
-          }, 2000);
-        } else {
+          setTimeout(() => router.push("/login"), 1500);
         }
         resetForm();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,29 +44,22 @@ function RegisterForm() {
   });
 
   return (
-    <div>
-      {isRegistered && (
-        <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
-          <p className="font-semibold">Registration Successful!</p>
-          <p className="text-sm">Redirecting you to login page...</p>
-        </div>
-      )}
-
-      <form onSubmit={formik.handleSubmit} className="mt-5 mr-30">
+    <div className=" ml-20 w-125 bg-black/40 backdrop-blur-md border border-white/10 p-10 rounded-2xl shadow-lg">
+      <form onSubmit={formik.handleSubmit}>
         <InputField
-          label="Email address"
+          label="Email"
           type="email"
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            if (formik.touched.email && formik.errors.email) {
-              showToast(formik.errors.email, "error");
-            }
-          }}
+          onBlur={formik.handleBlur}
           disabled={isRegistered}
         />
+        {formik.errors.email && (
+          <p className="text-custume-orange text-sm mt-1">
+            {formik.errors.email}
+          </p>
+        )}
 
         <InputField
           label="Password"
@@ -76,14 +67,14 @@ function RegisterForm() {
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            if (formik.touched.password && formik.errors.password) {
-              showToast(formik.errors.password, "error");
-            }
-          }}
+          onBlur={formik.handleBlur}
           disabled={isRegistered}
         />
+        {formik.errors.password && (
+          <p className="text-custume-orange text-sm mt-1">
+            {formik.errors.password}
+          </p>
+        )}
 
         <InputField
           label="Confirm Password"
@@ -91,17 +82,14 @@ function RegisterForm() {
           name="confirmPassword"
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            if (
-              formik.touched.confirmPassword &&
-              formik.errors.confirmPassword
-            ) {
-              showToast(formik.errors.confirmPassword, "error");
-            }
-          }}
+          onBlur={formik.handleBlur}
           disabled={isRegistered}
         />
+        {formik.errors.confirmPassword && (
+          <p className="text-custume-orange text-sm mt-1">
+            {formik.errors.confirmPassword}
+          </p>
+        )}
 
         <InputField
           label="Name"
@@ -109,14 +97,14 @@ function RegisterForm() {
           name="name"
           value={formik.values.name}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            if (formik.touched.name && formik.errors.name) {
-              showToast(formik.errors.name, "error");
-            }
-          }}
+          onBlur={formik.handleBlur}
           disabled={isRegistered}
         />
+        {formik.errors.name && (
+          <p className="text-custume-orange text-sm mt-1">
+            {formik.errors.name}
+          </p>
+        )}
 
         <InputField
           label="Address"
@@ -124,14 +112,14 @@ function RegisterForm() {
           name="address"
           value={formik.values.address}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            if (formik.touched.address && formik.errors.address) {
-              showToast(formik.errors.address, "error");
-            }
-          }}
+          onBlur={formik.handleBlur}
           disabled={isRegistered}
         />
+        {formik.errors.address && (
+          <p className="text-custume-orange text-sm mt-1">
+            {formik.errors.address}
+          </p>
+        )}
 
         <InputField
           label="Phone"
@@ -139,55 +127,23 @@ function RegisterForm() {
           name="phone"
           value={formik.values.phone}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            if (formik.touched.phone && formik.errors.phone) {
-              showToast(formik.errors.phone, "error");
-            }
-          }}
+          onBlur={formik.handleBlur}
           disabled={isRegistered}
         />
-
-        <button
-          type="submit"
-          disabled={formik.isSubmitting}
-          className="mt-3 w-100 bg-custume-orange text-custume-light py-2 rounded-md hover:bg-burnt-orange"
-        >
-          {formik.isSubmitting ? (
-            <svg
-              aria-hidden="true"
-              role="status"
-              className="inline w-4 h-4 me-3 text-current-light animate-spin dark:text-current-light"
-              viewBox="0 0 100 101"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                fill="currentColor"
-              />
-              <path
-                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                fill="black"
-              />
-            </svg>
-          ) : isRegistered ? (
-            "REGISTERED"
-          ) : (
-            "CREATE ACCOUNT"
-          )}
-        </button>
+        {formik.errors.phone && (
+          <p className="text-custume-orange text-sm mt-1">
+            {formik.errors.phone}
+          </p>
+        )}
 
         <div className="flex items-start mt-5">
-          <div className="flex items-center h-5">
-            <input
-              id="terms"
-              type="checkbox"
-              className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300"
-              required
-              disabled={isRegistered}
-            />
-          </div>
+          <input
+            id="terms"
+            type="checkbox"
+            className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-orange-400"
+            required
+            disabled={isRegistered}
+          />
           <label
             htmlFor="terms"
             className="ms-2 text-sm font-medium text-custume-light"
@@ -195,11 +151,55 @@ function RegisterForm() {
             I agree with the{" "}
             <a
               href="https://www.gob.mx/terminos"
-              className="text-custume-light hover:underline dark:text-custume-orange"
+              className="text-custume-orange hover:underline"
+              target="_blank"
             >
               terms and conditions
             </a>
           </label>
+        </div>
+
+        <button
+          type="submit"
+          disabled={formik.isSubmitting || isRegistered}
+          className="mt-6 w-full bg-custume-orange text-white font-semibold py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 disabled:opacity-60"
+        >
+          {formik.isSubmitting ? (
+            <div className="flex justify-center items-center">
+              <svg
+                aria-hidden="true"
+                role="status"
+                className="inline w-5 h-5 mr-2 text-white animate-spin"
+                viewBox="0 0 100 101"
+                fill="none"
+              >
+                <path
+                  d="M100 50.59C100 78.20 77.61 100.59 50 100.59C22.39 100.59 0 78.20 0 50.59C0 22.98 22.39 0.59 50 0.59C77.61 0.59 100 22.98 100 50.59ZM9.08 50.59C9.08 73.19 27.40 91.51 50 91.51C72.60 91.51 90.92 73.19 90.92 50.59C90.92 27.99 72.60 9.67 50 9.67C27.40 9.67 9.08 27.99 9.08 50.59Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.96 39.04C96.39 38.40 97.86 35.91 97.00 33.55C95.29 28.82 92.87 24.36 89.81 20.35C85.84 15.12 80.88 10.72 75.21 7.41C69.54 4.10 63.27 1.94 56.76 1.05C51.76 0.36 46.69 0.44 41.73 1.27C39.26 1.69 37.81 4.19 38.45 6.62C39.08 9.04 41.57 10.47 44.05 10.10C47.85 9.55 51.72 9.53 55.54 10.04C60.86 10.77 65.99 12.54 70.63 15.25C75.27 17.96 79.33 21.56 82.58 25.84C84.91 28.91 86.79 32.29 88.18 35.87C89.08 38.21 91.54 39.67 93.96 39.04Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+          ) : isRegistered ? (
+            "REGISTERED"
+          ) : (
+            "CREATE ACCOUNT"
+          )}
+        </button>
+
+        <div className="mt-6 text-center text-gray-400">
+          <p>
+            Already have an account?{" "}
+            <span
+              onClick={() => router.push("/login")}
+              className="text-custume-orange hover:underline cursor-pointer"
+            >
+              Log in
+            </span>
+          </p>
         </div>
       </form>
     </div>

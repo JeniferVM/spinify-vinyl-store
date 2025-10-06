@@ -1,17 +1,14 @@
 import Image from "next/image";
-import { getAllProducts } from "../Services/prod.serv";
-import { ProductsList } from "../components/ProductList";
 import ProdMenu from "../components/ProdMenu";
+import CategoryBar from "../components/CategoryBar";
 
-export default async function ProductsPage() {
-  const allProducts = await getAllProducts();
-
+export default function ProductsPage() {
   return (
     <div className="min-h-screen pb-12">
-      <div className="pt-12 pb-16 px-6 max-w-7xl ml-30 mx-auto">
+      <div className="pt-3 pb-16 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-hebbo font-bold text-white leading-tight">
+            <h1 className="text-4xl text-4xl font-hebbo font-bold text-white leading-tight">
               Find your
               <span className="block text-custume-orange mt-2 relative">
                 spin sound
@@ -22,7 +19,8 @@ export default async function ProductsPage() {
               Discover the perfect vinyl to complete your collection
             </p>
           </div>
-          <div className="hidden lg:flex justify-center items-center">
+
+          <div className="hidden lg:flex justify-center items-center relative">
             <Image
               src="/assets/track.jpeg"
               alt="Vintage turntable with vinyl record"
@@ -30,19 +28,12 @@ export default async function ProductsPage() {
               height={300}
               className="object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110 filter contrast-110 saturate-110"
             />
-            <div className="absolute top-4 right-4 w-3 h-3 bg-custume-orange rounded-full opacity-80 animate-pulse"></div>
           </div>
         </div>
-        <div className="mt-20">
-          <ProdMenu />
-          <div className="relative w-3/4 mx-auto mt-5">
-            <div className="h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
-            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-custume-orange rounded-full shadow-lg shadow-custume-orange/50"></div>
-          </div>
-        </div>
-      </div>
-      <ProductsList products={allProducts} />
+        <ProdMenu />
 
+        <CategoryBar />
+      </div>
       <div className="mt-20 text-center">
         <div className="relative w-1/3 mx-auto">
           <div className="h-px bg-gradient-to-r from-transparent via-custume-orange/30 to-transparent"></div>
