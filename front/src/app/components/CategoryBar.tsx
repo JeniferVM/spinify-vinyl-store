@@ -6,15 +6,15 @@ import productInterface from "../interface/productInterface";
 import ProductsList from "../components/ProductList";
 
 const categoriesById = [
-  { id: 1, name: "Rock" },
-  { id: 2, name: "Pop" },
-  { id: 3, name: "Soul/R&B" },
-  { id: 4, name: "Hard Rock" },
-  { id: 5, name: "Alternative Rock" },
-  { id: 6, name: "Hip Hop" },
-  { id: 7, name: "Folk" },
-  { id: 8, name: "Jazz" },
-  { id: 9, name: "Electronic" },
+  { id: 1, name: "rock" },
+  { id: 2, name: "pop" },
+  { id: 3, name: "soul" },
+  { id: 4, name: "hard Rock" },
+  { id: 5, name: "alternative rock" },
+  { id: 6, name: "hip hop" },
+  { id: 7, name: "folk" },
+  { id: 8, name: "jazz" },
+  { id: 9, name: "electronic" },
 ];
 
 export default function CategoryBar() {
@@ -22,6 +22,7 @@ export default function CategoryBar() {
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null
   );
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,34 +36,102 @@ export default function CategoryBar() {
     ? allProducts.filter((p) => p.categoryId === selectedCategoryId)
     : allProducts;
 
+  const handleCategorySelect = (id: number | null) => {
+    setSelectedCategoryId(id);
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
-      <div className="sticky top-44 z-50 bg-black flex justify-center flex-wrap gap-4 p-5 mt-8">
+      {/* Desktop - Horizontal scroll */}
+      <div className="hidden md:block sticky top-44 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex gap-3 p-5 min-w-max">
+            <button
+              onClick={() => setSelectedCategoryId(null)}
+              className={`px-6 py-2.5 rounded-lg border transition-all whitespace-nowrap hover:bg-custume-light/20 ${
+                selectedCategoryId === null
+                  ? "border-custume-light text-custume-light font-semibold"
+                  : "border-custume-light/40 text-custume-light/70"
+              }`}
+            >
+              all products
+            </button>
+
+            {categoriesById.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategoryId(cat.id)}
+                className={`px-6 py-2.5 rounded-lg border transition-all whitespace-nowrap hover:bg-custume-orange/20 ${
+                  selectedCategoryId === cat.id
+                    ? "border-custume-orange text-custume-orange font-semibold"
+                    : "border-custume-orange/40 text-custume-orange/70"
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile - Dropdown menu */}
+      <div className="md:hidden sticky top-44 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10 p-4">
         <button
-          onClick={() => setSelectedCategoryId(null)}
-          className={`bg-black border border-custume-light/40 px-4 py-2 rounded-lg border transition-all hover:bg-custume-light/20 ${
-            selectedCategoryId === null
-              ? "bg-black border border-custume-light/40 text-custume-light"
-              : "bg-transparent text-custume-light border-custume-light"
-          }`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="w-full px-4 py-3 rounded-lg border border-custume-orange text-custume-orange font-semibold flex items-center justify-between"
         >
-          Todos los productos
+          <span>
+            {selectedCategoryId
+              ? categoriesById.find((c) => c.id === selectedCategoryId)?.name
+              : "all products"}
+          </span>
+          <svg
+            className={`w-5 h-5 transition-transform ${
+              isMenuOpen ? "rotate-180" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
         </button>
 
-        {categoriesById.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setSelectedCategoryId(cat.id)}
-            className={`px-4 py-2 rounded-lg border transition-all hover:bg-custume-orange/20 ${
-              selectedCategoryId === cat.id
-                ? "bg-transparent border-custume-orange text-custume-orange"
-                : "bg-transparent text-custume-orange border-custume-orange"
-            }`}
-          >
-            {cat.name}
-          </button>
-        ))}
+        {isMenuOpen && (
+          <div className="absolute top-full left-0 right-0 mt-1 bg-black/95 backdrop-blur-sm border border-white/10 rounded-lg shadow-xl mx-4 max-h-96 overflow-y-auto">
+            <button
+              onClick={() => handleCategorySelect(null)}
+              className={`w-full text-left px-4 py-3 transition-all border-b border-white/5 ${
+                selectedCategoryId === null
+                  ? "bg-custume-light/10 text-custume-light font-semibold"
+                  : "text-custume-light/70 hover:bg-white/5"
+              }`}
+            >
+              all products
+            </button>
+            {categoriesById.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => handleCategorySelect(cat.id)}
+                className={`w-full text-left px-4 py-3 transition-all border-b border-white/5 ${
+                  selectedCategoryId === cat.id
+                    ? "bg-custume-orange/10 text-custume-orange font-semibold"
+                    : "text-custume-orange/70 hover:bg-white/5"
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
+
       <ProductsList products={filteredProducts} />
     </>
   );

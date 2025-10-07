@@ -24,7 +24,7 @@ function NavBar() {
               <Link href={PATHROUTES.DASHBOARD} className="m-4">
                 <button className="relative px-6 py-3 text-custume-orange text-lg font-medium transition-all duration-300 rounded-xl hover:bg-custume-orange/10 hover:scale-105 group overflow-hidden border border-custume-orange/30 hover:border-custume-orange/60">
                   <div className="relative z-10 group-hover:text-custume-orange brightness-110 transition-all duration-300"></div>
-                  Your Profile
+                  My Profile
                 </button>
               </Link>
             )}

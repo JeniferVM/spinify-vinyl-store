@@ -35,7 +35,7 @@ export default function Dashboard() {
         <section className="relative">
           <div className="bg-gradient-to-br from-black/60 via-black/40 to-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-custume-orange/5">
             <h3 className="text-2xl font-semibold mb-6 text-custume-orange">
-              Your personal info
+              My personal info
             </h3>
 
             <div className="grid gap-4">

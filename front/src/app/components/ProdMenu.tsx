@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAuth } from "../context/authContext";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export function ProdMenu() {
   const { dataUser } = useAuth();
@@ -28,7 +29,7 @@ export function ProdMenu() {
           {dataUser && isNotCartPage && (
             <Link
               href="/cartPage"
-              className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-light/30 hover:border-custume-light/60 transition-all duration-300 hover:scale-105 hover:bg-custume-light/10"
+              className="group flex flex-row items-center justify-around w-auto gap-3 px-6 py-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-custume-light/30 hover:border-custume-light/60 transition-all duration-300 hover:scale-105 hover:bg-custume-light/10"
             >
               <span className="text-2xl text-custume-light group-hover:text-light-400 font-medium transition-colors duration-300">
                 my cart

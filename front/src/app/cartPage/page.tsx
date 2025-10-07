@@ -45,7 +45,7 @@ export default function CartPage() {
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-white mt-10 mb-2">
-              Your Cart
+              My <span className="text-custume-orange"> cart</span>
             </h1>
             <div className="w-24 h-px bg-gradient-to-r from-transparent via-custume-orange/50 to-transparent"></div>
           </div>
@@ -72,8 +72,9 @@ export default function CartPage() {
   return (
     <div className="p-6">
       <div className=" mx-auto">
-        <h2 className="text-4xl font-bold text-white mt-10 mb-2">YOUR CART</h2>
-
+        <h1 className="text-4xl font-bold text-white mt-10 mb-2">
+          Your <span className="text-custume-orange"> cart</span>
+        </h1>
         <ProdMenu />
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -95,10 +96,10 @@ export default function CartPage() {
                         className="flex justify-between text-sm text-white/60"
                       >
                         <span className="truncate mr-2">
-                          {item.name} {item.quantity > 1 && `x${item.quantity}`}
+                          {item.name} {item.quantity ?? 1}
                         </span>
                         <span className="flex-shrink-0">
-                          ${(item.price * item.quantity).toFixed(2)}
+                          ${(item.price * (item.quantity ?? 1)).toFixed(2)}
                         </span>
                       </div>
                     ))}

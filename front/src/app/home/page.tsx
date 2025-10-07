@@ -11,12 +11,13 @@ export default function Home() {
     <div className="space-y-8 pb-8">
       <ProdMenu />
 
-      <div className="max-w-6xl mx-auto px-8 py-16">
+      <div className="max-w-6xl mx-auto pt-0 py-16">
         <div className="relative">
-          <div className="bg-black/40 backdrop-blur-md rounded-2xl p-12 border border-white/10 hover:border-custume-orange/30 transition-all duration-300">
+          <div className="bg-black/40 backdrop-blur-md">
             <div className="text-center mb-8">
               <h2 className="text-5xl font-bold text-white mb-2">
-                About <span className="text-custume-orange">Us</span>
+                Get the best{" "}
+                <span className="text-custume-orange"> vinyl spin</span>
               </h2>
               <div className="w-24 h-1 bg-custume-orange mx-auto"></div>
             </div>
@@ -59,7 +60,7 @@ export default function Home() {
               <div className="flex justify-center relative group">
                 <div className="relative rounded-lg overflow-hidden border border-20px border-black/40">
                   <Image
-                    src="/assets/vinilPic.jpg"
+                    src="/assets/vinilPicture.jpg"
                     alt="Vintage turntable with vinyl record"
                     width={350}
                     height={350}

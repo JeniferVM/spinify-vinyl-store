@@ -7,7 +7,7 @@ interface productInterface {
   image: string;
   categoryId: number;
   stock: number;
-  quantity?: number;
+  quantity?: number | undefined;
 }
 
 export default productInterface;

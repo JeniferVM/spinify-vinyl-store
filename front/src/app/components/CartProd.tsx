@@ -102,9 +102,15 @@ export default function CartProd() {
 
                   <button
                     onClick={() => handleRemove(item.id.toString(), item.name)}
-                    className="px-4 py-2 text-sm font-medium rounded-xl border border-custume-orange text-custume-orange hover:bg-custume-orange hover:text-white transition-all"
+                    className="px-4 py-2 text-sm font-medium rounded-xl border border-custume-orange text-custume-orange hover:bg-custume-orange/20 hover:text-white transition-all"
                   >
-                    X
+                    <Image
+                      src="/assets/deleteIcon.png"
+                      alt="deleteIcon"
+                      width={15}
+                      height={15}
+                      className="object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110 filter contrast-110 saturate-110"
+                    />
                   </button>
                 </div>
               </div>
