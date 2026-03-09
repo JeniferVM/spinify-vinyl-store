@@ -91,11 +91,11 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 
 ## 📸 Capturas de pantalla
 
-![Home](./screenshots/home.png)
-![Best Sellers](./screenshots/best-sellers.png)
-![Checkout](./screenshots/checkout.png)
-![Pasarela de pago](./screenshots/pasarela.png)
-![Perfil de usuario](./screenshots/perfil.png)
+![Home](../screenshots/home.png)
+![Best Sellers](../screenshots/best-sellers.png)
+![Checkout](../screenshots/checkout.png)
+![Pasarela de pago](../screenshots/pasarela.png)
+![Perfil de usuario](../screenshots/perfil.png)
 
 ---
 
