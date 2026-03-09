@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useAuth } from "../context/authContext";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 
 export function ProdMenu() {
   const { dataUser } = useAuth();

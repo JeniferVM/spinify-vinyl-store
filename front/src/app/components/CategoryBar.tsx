@@ -43,7 +43,6 @@ export default function CategoryBar() {
 
   return (
     <>
-      {/* Desktop - Horizontal scroll */}
       <div className="hidden md:block sticky top-44 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
         <div className="overflow-x-auto scrollbar-hide">
           <div className="flex gap-3 p-5 min-w-max">
@@ -55,7 +54,7 @@ export default function CategoryBar() {
                   : "border-custume-light/40 text-custume-light/70"
               }`}
             >
-              all products
+              todos los productos
             </button>
 
             {categoriesById.map((cat) => (
@@ -75,7 +74,6 @@ export default function CategoryBar() {
         </div>
       </div>
 
-      {/* Mobile - Dropdown menu */}
       <div className="md:hidden sticky top-44 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10 p-4">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -113,7 +111,7 @@ export default function CategoryBar() {
                   : "text-custume-light/70 hover:bg-white/5"
               }`}
             >
-              all products
+              todos los productos
             </button>
             {categoriesById.map((cat) => (
               <button
